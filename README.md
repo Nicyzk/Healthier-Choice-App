@@ -9,4 +9,6 @@
 
 - [UI Mockup](https://www.figma.com/proto/NPqkcPJpspD7cXxPNS1SEG/Swee-Solutions?page-id=0%3A1&node-id=2%3A1&viewport=1432%2C2628%2C0.34&scaling=scale-down&starting-point-node-id=2%3A1)
 
-test by jodi
+
+## Lab 2
+- [Sequence Diagram]()
