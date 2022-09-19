@@ -1,6 +1,7 @@
 import { View, Image, SafeAreaView,  Text, StyleSheet, Dimensions, TextInput, FlatList } from 'react-native';
 import React from 'react';
-import COLORS from '../../consts/colors';
+import COLORS from '../consts/colors';
+import drinks from '../consts/drinks';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 const width = Dimensions.get('screen').width/2-30
 
