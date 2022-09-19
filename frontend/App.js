@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './components/HomePage'
 import Overlay from './components/Overlay'
+import MyLists from './components/MyLists'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
