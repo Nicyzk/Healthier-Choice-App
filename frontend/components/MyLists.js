@@ -1,7 +1,7 @@
-import { View, Image, SafeAreaView,  Text, StyleSheet, Button, TextInput, Dimensions, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import { View, Image, SafeAreaView,  Text, StyleSheet, Dimensions, TextInput, FlatList } from 'react-native';
+import React from 'react';
 import COLORS from '../../consts/colors';
-import Icon from 'react-native-vector-icons'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 const width = Dimensions.get('screen').width/2-30
 
 const MyLists = () => {
