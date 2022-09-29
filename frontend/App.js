@@ -9,10 +9,10 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 
   return (
-    <NavigationContainer>``
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="overlay" component={Overlay} />
-        <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="HomePage" component={HomePage} /> 
         <Stack.Screen name="MyLists" component={MyLists} />
       </Stack.Navigator>
     </NavigationContainer>

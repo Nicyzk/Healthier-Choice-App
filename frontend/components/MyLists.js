@@ -1,7 +1,6 @@
 import { View, Image, SafeAreaView,  Text, StyleSheet, Dimensions, TextInput, FlatList } from 'react-native';
 import React from 'react';
-import COLORS from '../consts/colors';
-import drinks from '../consts/drinks';
+import { colors, drinks } from '../consts/constants';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 const width = Dimensions.get('screen').width/2-30
 
@@ -10,13 +9,13 @@ const MyLists = () => {
     const Card = ({item}) => {
         return(
             <View style = {style.card}>
-                <View style  = {{flex: 1}}> //location icon at the bottom of vitagen container
+                <View style  = {{flex: 1}}> 
                     <View style={{width: 30, height: 30, borderRadius:15, alignItems: 'center', justifyContent: 'center'}}>
                         <icon name = "location" size = {18} />
                     </View>
                 </View>
                 <View style={{height: 100, alignItems: 'center'}}>
-                    <Image style = {{flex: 1, resizeMode: 'contain'}} source = {drinks.img} />
+                    <Image style = {{flex: 1, resizeMode: 'contain'}} source = {drinks[0].img} />
                 </View>
             </View>
     )};
@@ -72,7 +71,7 @@ const style = StyleSheet.create({
     },
     searchContainer: {
         height: 50,
-        backgroundColor: COLORS.white,
+        backgroundColor: colors.white,
         borderRadius: 10,
         flex: 1,
         flexDirection: 'row',
@@ -81,7 +80,7 @@ const style = StyleSheet.create({
     input: {
         fontsize: 18,
         fontWeight: 'bold',
-        color: COLORS.dark,
+        color: colors.dark,
         flex: 1
     },
     sortBtn: {
@@ -94,7 +93,7 @@ const style = StyleSheet.create({
     },
     card: {
         height: 225,
-        backgroundColor: COLORS.purple,
+        backgroundColor: colors.purple,
         width,
         marginHorizontal: 2,
         borderRadius: 10,
