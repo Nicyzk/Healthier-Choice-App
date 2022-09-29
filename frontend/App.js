@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import HomePage from './components/HomePage'
+import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
