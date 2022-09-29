@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import FaIcon from 'react-native-vector-icons/FontAwesome'
-import { Animated, Image, View, Text, ScrollView } from 'react-native'
+import { Animated, Image, View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native'
 
-const Carousel = ({ images }) => {
+const Carousel = ({ images, navigation }) => {
 
     const renderedImg = []
     for (let key in images) {
@@ -17,7 +17,7 @@ const Carousel = ({ images }) => {
                             name="shopping-basket"
                             color="black"
                             size={20}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('MyLists')}
                         ></FaIcon>
                         <FaIcon
                             name="map-marker"
