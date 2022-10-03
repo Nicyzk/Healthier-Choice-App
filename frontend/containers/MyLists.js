@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 import Button from '../components/Button'
 import SearchBar from '../components/searchBar'
 import styles from '../components/ButtonStyles';
+import NavBar from '../components/navBar';
 
 export default function MyLists () {
     const [name,setName] = useState("")
@@ -23,6 +24,7 @@ export default function MyLists () {
       <Button styles={styles.rectbutton} text = {styles.blacktext} name='Snacks' click={ClickMe}/>
 
       <Button styles={styles.roundbutton} text = {styles.whitetext} name='Create New List' click={ClickMe}/>
+      <NavBar></NavBar>
     </View>
         
   )
