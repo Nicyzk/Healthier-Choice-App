@@ -9,7 +9,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import Fa5Icon from 'react-native-vector-icons/FontAwesome5'
 import { Animated, Image, ScrollView, TouchableWithoutFeedback } from 'react-native'
 
-export default function infoPage () {
+export default function InfoPage () {
     const [name,setName] = useState("")
     const navigation = useNavigation()
     

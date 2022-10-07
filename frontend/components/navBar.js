@@ -15,7 +15,7 @@ const Navbar = () => {
                     ></FaIcon>
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('infoPage')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('InfoPage')}>
                 <View className="px-1">
                     <FaIcon
                         name="info"

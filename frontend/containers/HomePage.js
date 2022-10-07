@@ -80,6 +80,7 @@ const HomePage = ({ navigation }) => {
                 <SearchBar showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
                 <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Recommended</Text>
                 <Carousel images={images} navigation={navigation}></Carousel>
+                <NavBar></NavBar>
             </View>
             {showFilter ? renderFilter() : null}
         </>

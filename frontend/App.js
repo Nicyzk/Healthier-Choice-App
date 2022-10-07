@@ -3,7 +3,7 @@ import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
 import MyLists from './containers/MyLists'
 import SugarPage from './containers/SugarPage'
-import infoPage from './containers/infoPage'
+import InfoPage from './containers/InfoPage'
 import SodiumPage from './containers/SodiumPage'
 import CalciumPage from './containers/CalciumPage'
 import CholestrolPage from './containers/CholestrolPage'
@@ -21,7 +21,7 @@ export default function App() {
         <Stack.Screen name="overlay" component={Overlay} />
         <Stack.Screen name="HomePage" component={HomePage} /> 
         <Stack.Screen name="MyLists" component={MyLists} />
-        <Stack.Screen name="infoPage" component={infoPage} />
+        <Stack.Screen name="InfoPage" component={InfoPage} />
         <Stack.Screen name="SugarPage" component={SugarPage} />
         {/* <Stack.Screen name="MyListBeverages" component={MyListBeverages} />   */}
       </Stack.Navigator>
