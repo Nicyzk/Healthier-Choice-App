@@ -1,10 +1,12 @@
 import FaIcon from 'react-native-vector-icons/FontAwesome'
 import IoIcon from 'react-native-vector-icons/Ionicons'
-import { View, TextInput, Image } from 'react-native';
+import { View, TextInput } from 'react-native';
 
-const SearchBar = () => (
-    <View className="m-4 w-11/12 flex-row justify-center justify-between bg-gray-50 rounded-lg border border-gray-300" style={{ elevation: 2 }}>
-        <View className="pl-2 w-2/12"><FaIcon.Button
+const SearchBar = ({showFilter, setShowFilter}) => {
+
+    return (
+        <View className="m-4 w-11/12 flex-row justify-center justify-between bg-gray-50 rounded-lg border border-gray-300" style={{ elevation: 2 }}>
+        <View className="pl-2 w-3/12"><FaIcon.Button
             name="search"
             className='h-12 bg-gray-50'
             color="black"
@@ -17,9 +19,14 @@ const SearchBar = () => (
             name="filter"
             className='h-12 bg-gray-50'
             color="black"
-            onPress={() => { }}
+            onPress={() => setShowFilter(!showFilter)}
         ></IoIcon.Button></View>
     </View>
-)
+    ) 
+    
+}
+
+
+
 
 export default SearchBar
