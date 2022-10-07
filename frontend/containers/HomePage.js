@@ -1,5 +1,6 @@
 import { View, Text, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import SearchBar from '../components/searchBar'
+import NavBar from '../components/navBar'
 import Carousel from '../components/carousel'
 import { useEffect, useState } from 'react'
 import DropdownMulti from '../components/dropdown-multi'

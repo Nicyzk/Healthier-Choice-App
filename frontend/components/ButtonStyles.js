@@ -37,10 +37,30 @@ const styles = StyleSheet.create({
     color:'black',
     fontweight:'bold',
   },
+
+  greytext:{
+    fontsize:30,
+    color:'black',
+    fontweight:'bold',
+  },
+  
   whitetext:{
     fontsize:30,
     color:'white',
     fontweight:'bold'
+  },
+
+  morebutton:{
+    backgroundColor:'#4169e1',
+    padding:10,
+    borderRadius:30,
+    marginTop:20,
+    marginBottom: 10,
+    alignItems:'center',
+    width:'50%',
+    alignSelf:'center',
+    borderWidth:3,
+    borderColor:'rgba(0, 0, 0, 0.1)'
   }
 })
 export default styles;
