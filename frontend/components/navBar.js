@@ -33,7 +33,7 @@ const Navbar = () => {
                     ></FaIcon>
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('AboutPage')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('MyProfilePage')}>
                 <View className="px-1">
                     <FaIcon
                         name="gear"
