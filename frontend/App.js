@@ -11,7 +11,6 @@ import CholestrolPage from './containers/CholestrolPage'
 import FatsPage from './containers/FatsPage'
 // import MyListBeverages from './containers/MyListBeverages';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import EditProfile from './components/EditProfile';
 
 const Stack = createNativeStackNavigator();
 

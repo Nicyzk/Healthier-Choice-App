@@ -8,7 +8,6 @@ function dropdown({options, value, setValue}) {
 
   return (
     <>
-      <Text>{value}</Text>
       <DropDownPicker
         multiple={true}
         open={open}

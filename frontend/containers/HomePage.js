@@ -24,7 +24,7 @@ const HomePage = ({ navigation }) => {
         let i = 0   // for z-index bug in dropdown
         for (let key in healthyChoicesOptions) {
             healthFilters.push(
-                <View className="my-2" key={key}>
+                <View className="my-2" key={key} style={{zIndex: 10-i}}>
                     <DropdownSingle
                         style={{ zIndex: 10-i }}
                         options={healthyChoicesOptions[key]}
@@ -47,7 +47,7 @@ const HomePage = ({ navigation }) => {
                     <View className='absolute h-full w-full bg-gray-200 opacity-80'></View>
                 </TouchableWithoutFeedback>
                 <View className="absolute h-full w-full flex-1 justify-center items-center z-2">
-                    <View className="h-5/6 w-80 rounded-xl p-8 bg-white">
+                    <View className="w-80 rounded-xl p-8 bg-white">
                         <Text className='text-2xl font-bold text-center'>Filter by category</Text>
                         <View className="my-4" style={{ zIndex: 20 }}>
                             <Text className="font-bold">Type:</Text>
