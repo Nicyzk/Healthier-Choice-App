@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAreaView, ScrollView, StatusBar, TextInput } from 'react-native';
 import React,{useState} from 'react';
 import SelectList from 'react-native-dropdown-select-list';
-import UploadImage from './UploadImage';
+import UploadImage from '../components/UploadImage';
 
 
 

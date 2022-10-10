@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
-import MyProfilePage from './components/MyProfilePage'
+import MyProfilePage from './containers/MyProfilePage'
 import MyLists from './containers/MyLists'
 import SugarPage from './containers/SugarPage'
 import InfoPage from './containers/InfoPage'

@@ -26,6 +26,7 @@ const HomePage = ({ navigation }) => {
             healthFilters.push(
                 <View className="my-2" key={key}>
                     <DropdownSingle
+                        style={{ zIndex: 10-i }}
                         options={healthyChoicesOptions[key]}
                         value={healthyChoices} // Ex: {'Sugar': 'low in sugar'}
                         value_key={key}
