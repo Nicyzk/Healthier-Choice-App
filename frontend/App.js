@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
+import MyProfilePage from './components/MyProfilePage'
 import MyLists from './containers/MyLists'
 import SugarPage from './containers/SugarPage'
 import InfoPage from './containers/InfoPage'
@@ -11,6 +12,7 @@ import FatsPage from './containers/FatsPage'
 import MyProfilePage from './components/MyProfilePage'
 // import MyListBeverages from './containers/MyListBeverages';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import EditProfile from './components/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
