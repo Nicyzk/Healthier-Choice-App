@@ -21,6 +21,7 @@ function dropdown({ options, value, value_key, setValue, index, placeholder }) {
                 placeholder={placeholder}
                 mode="BADGE"
                 badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
+                listMode="SCROLLVIEW"
                 extendableBadgeContainer={true}
             />
         </>
