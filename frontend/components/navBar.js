@@ -1,43 +1,51 @@
 import { View, Text, Image, TouchableWithoutFeedback, Touchable, Switch } from 'react-native';
 import FaIcon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
 
 const Navbar = () => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const [actionTriggered, setActionTriggered] = useState('');
     return (
-        <View className="left-3 flex-row w-full h-18 bottom-0.5 items-center justify-evenly absolute py-4 bg-white rounded-lg">
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('MyLists')}>
-                <View className="px-1">
+        <View className="flex-row w-screen h-16 bottom-0 items-center justify-between absolute py-4 bg-white rounded-lg border-2 border-slate-200">
+            <TouchableWithoutFeedback onPress={() => {
+                navigation.navigate('HomePage');
+                
+            }}>
+                <View className="ml-12">
                     <FaIcon
                         name="home"
-                        color="#D3D3D3"
+                        color="#6c6e71"
                         size={30}
                     ></FaIcon>
                 </View>
+                
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('InfoPage')}>
-                <View className="px-1">
+            <TouchableWithoutFeedback onPress={() => {
+                navigation.navigate('InfoPage');
+                }}>
+                <View className="px-0 ml-2">
                     <FaIcon
                         name="info"
-                        color="#D3D3D3"
+                        color="#6c6e71"
                         size={30}
                     ></FaIcon>
                 </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('MyLists')}>
-                <View className="px-1">
+                <View className="px-1 ml-2">
                     <FaIcon
                         name="shopping-basket"
-                        color="#D3D3D3"
+                        color="#6c6e71"
                         size={28}
                     ></FaIcon>
                 </View>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('MyProfilePage')}>
-                <View className="px-1">
+                <View className="mr-12">
                     <FaIcon
                         name="gear"
-                        color="#D3D3D3"
+                        color="#6c6e71"
                         size={30}
                     ></FaIcon>
                 </View>

@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
     fontweight:'bold'
   },
 
+  // underline: {
+  //   textDecorationLine: 'underline',
+  // },
+
   morebutton:{
     backgroundColor:'#4169e1',
     padding:10,

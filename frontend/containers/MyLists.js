@@ -16,7 +16,7 @@ export default function MyLists () {
 
     return(
     
-    <View className="p-4 flex-1 bg-white" >
+    <View className="p-4 flex-1 bg-white p-4" >
       <Text className="text-2xl text-center font-bold m-4 py-4 ">My Lists</Text>
       <SearchBar></SearchBar>
       <Button styles={styles.rectbutton} text = {styles.blacktext}name='Beverages' click={ClickMe}/>
