@@ -9,6 +9,7 @@ import SodiumPage from './containers/SodiumPage'
 import CalciumPage from './containers/CalciumPage'
 import CholestrolPage from './containers/CholestrolPage'
 import FatsPage from './containers/FatsPage'
+import MapPage from './containers/MapPage'
 // import MyListBeverages from './containers/MyListBeverages';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

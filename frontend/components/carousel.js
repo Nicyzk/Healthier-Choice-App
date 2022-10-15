@@ -23,7 +23,7 @@ const Carousel = ({ images, navigation }) => {
                             name="map-marker"
                             color="black"
                             size={20}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('MapPage')}
                         ></FaIcon>
                     </View>
                 </View>
