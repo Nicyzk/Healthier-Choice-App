@@ -7,7 +7,7 @@ const Carousel = ({ images, navigation }) => {
     const renderedImg = []
     for (let key in images) {
         renderedImg.push(
-            <View className='mx-2 my-6 py-4 h-56 w-48 rounded-3xl' style={{ backgroundColor: '#463EC633' }}>
+            <View className='mx-2 my-6 py-4 h-56 w-48 rounded-3xl' key={key} style={{ backgroundColor: '#463EC633' }}>
                 <View className='bottom-10 items-center'>
                     <Image className="h-40 w-40 rounded-3xl" key={key} source={images[key]} />
                     <Text className='font-bold text-lg'>Vitagen</Text>
