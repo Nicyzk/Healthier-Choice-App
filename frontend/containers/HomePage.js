@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import DropdownMulti from '../components/dropdown-multi'
 import DropdownSingle from '../components/dropdown-single';
 import { typeOptions, healthyChoicesOptions } from '../consts/constants'
-
+import React from 'react';
 
 const images = { 1: require('../assets/image1.png'), 2: require('../assets/image2.png') }
 
@@ -15,9 +15,6 @@ const HomePage = ({ navigation }) => {
     const [types, setTypes] = useState([])
     const [healthyChoices, setHealthyChoices] = useState({})
 
-    const onFilterBtnClicked = () => {
-        setShowFilter(false)
-    }
 
     const renderFilter = () => {
         const healthFilters = []
@@ -84,11 +81,10 @@ const HomePage = ({ navigation }) => {
                 <NavBar></NavBar>
             </View>
             {showFilter ? renderFilter() : null}
-        </>
+
+        </>   
     )
 
 }
-
-
 
 export default HomePage

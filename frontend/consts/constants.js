@@ -20,6 +20,12 @@ const colors = {
   purple: '#800080'
 };
 
+const ListOptions = [
+  {label: 'Groceries', value: 'groceries'},
+  {label: 'Beverages', value: 'beverages'},
+  {label: 'Snacks', value:'snacks'}
+];
+
 const typeOptions = [
   {label: 'Bread', value: 'bread'},
   {label: 'Beverage', value: 'beverage'},
