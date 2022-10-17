@@ -9,12 +9,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ListOptions } from '../consts/constants'
 import DropdownMulti from '../components/dropdown-multi'
 
-useEffect(() => {
-    if (showFilter) setTypes([1])
-}, [showFilter])
-const onFilterBtnClicked = () => {
-    setShowFilter(false)
-}
 
 const SUGAR = [
     { label: 'No Added Sugar', value: '1' },

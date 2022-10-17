@@ -15,7 +15,10 @@ const HomePage = ({ navigation }) => {
     const [types, setTypes] = useState([])
     const [healthyChoices, setHealthyChoices] = useState({})
 
-
+    const onFilterBtnClicked = () => {
+        setShowFilter(!showFilter)
+    }
+    
     const renderFilter = () => {
         const healthFilters = []
         let i = 0   // for z-index bug in dropdown
