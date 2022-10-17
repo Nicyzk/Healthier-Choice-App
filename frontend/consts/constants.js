@@ -50,4 +50,6 @@ const healthyChoicesOptions = {
   ], 
 }
 
-module.exports = { colors, drinks, typeOptions, healthyChoicesOptions };
+const PLACES_API_KEY = ''
+
+module.exports = { colors, drinks, typeOptions, healthyChoicesOptions, PLACES_API_KEY };

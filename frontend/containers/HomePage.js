@@ -24,7 +24,7 @@ const HomePage = ({ navigation }) => {
         let i = 0   // for z-index bug in dropdown
         for (let key in healthyChoicesOptions) {
             healthFilters.push(
-                <View className="my-2" key={key} style={{zIndex: 10-i}}>
+                <View className="my-2" key={key} style={{ zIndex: 10 - i }}>
                     <DropdownSingle
                         options={healthyChoicesOptions[key]}
                         value={healthyChoices} // Ex: {'Sugar': 'low in sugar'}
