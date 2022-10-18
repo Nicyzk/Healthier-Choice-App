@@ -44,9 +44,9 @@ const getInfo = "SELECT * FROM hcs_categories";
 const getInfobyCategory = "SELECT * FROM hcs_categories WHERE category = $1";
 // NOTE: Names need to be changed according to the column names
 const addInfo =
-  "INSERT INTO hcs_categories (hcs_subcat, hcs_cat, hcs_subcat_dec) VALUES ($1, $2, $3)";
+  "INSERT INTO hcs_categories (subcategory, category, subcategorydescription) VALUES ($1, $2, $3)";
 const checkSubcatExists =
-  "SELECT hcs_subcat FROM hcs_categories WHERE hcs_subcat = $1";
+  "SELECT subcateogry FROM hcs_categories WHERE subcateogry = $1";
 
 module.exports = {
   //usernames table
