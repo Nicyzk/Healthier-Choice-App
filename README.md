@@ -24,3 +24,18 @@
 
 - [Initial Dialog map](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Dialog%20Map.png?csf=1&web=1&e=utEAP0)
 
+
+
+## Lab 3
+- [Complete Use Case diagram](https://entuedu.sharepoint.com/:w:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Complete%20Use%20Case%20Model.docx?d=w4197cc30756d46028be3291e869e5d6f&csf=1&web=1&e=0IZexk)
+
+- Design Model
+    - [Class Diagram](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Ver%203_Class%20Diagram.png?csf=1&web=1&e=LdHi76)
+
+    - [Sequence Diagrams](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Sequence%20Diagrams?csf=1&web=1&e=HxWv17)
+
+    - [Dialog Map](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Dialog%20Map.png?csf=1&web=1&e=bvcLBK)
+
+- [System Architecture](https://entuedu.sharepoint.com/:p:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/System%20Architecture.pptx?d=w1d87e718b3cc4c21ac56a06d2eef4520&csf=1&web=1&e=YOvmQj)
+
+- Application Skeleton (in folder 'frontend' of this repository)
