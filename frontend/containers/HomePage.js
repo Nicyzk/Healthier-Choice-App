@@ -57,6 +57,7 @@ const HomePage = ({ navigation }) => {
                             <Text className="font-bold">Health Filter: </Text>
                             <ScrollView className='h-1/2'>
                                 {healthFilters}
+                                <View className='h-32'></View>
                             </ScrollView>
                         </View>
                         <View className="py-2" >
