@@ -16,9 +16,9 @@
 
 - [Use Case descriptions](https://entuedu.sharepoint.com/:w:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%201/Initial%20Use%20Case%20Model.docx?d=w4197cc30756d46028be3291e869e5d6f&csf=1&web=1&e=nfZc8h)
 
-- [Key boundary classes and control classes](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Key%20boundaries%20and%20control%20classes.jpg?csf=1&web=1&e=GCTWWw)
+- [Key boundary classes and control classes](https://entuedu.sharepoint.com/:b:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Key%20boundary%20classes%20and%20control%20classes.pdf?csf=1&web=1&e=HehTJt)
 
-- [Class diagram of entity classes](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Entity%20classes.jpg?csf=1&web=1&e=fYuBSY)
+- [Class diagram of entity classes](https://entuedu.sharepoint.com/:b:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Class%20diagram%20of%20entity%20classes.pdf?csf=1&web=1&e=pmZd2f)
 
 - [Sequence diagrams of some use cases](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%202/Sequence%20Diagrams?csf=1&web=1&e=ReVaVW)
 
