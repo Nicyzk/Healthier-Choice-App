@@ -27,14 +27,14 @@
 
 
 ## Lab 3
-- [Complete Use Case diagram](https://entuedu.sharepoint.com/:w:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Complete%20Use%20Case%20Model.docx?d=w4197cc30756d46028be3291e869e5d6f&csf=1&web=1&e=0IZexk)
+- [Complete Use Case descriptions](https://entuedu.sharepoint.com/:w:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Complete%20Use%20Case%20Model.docx?d=w4197cc30756d46028be3291e869e5d6f&csf=1&web=1&e=0IZexk)
 
 - Design Model
-    - [Class Diagram](https://entuedu.sharepoint.com/:b:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Class%20Diagram.pdf?csf=1&web=1&e=HhLV0f)
+    - [Complete Class Diagram](https://entuedu.sharepoint.com/:b:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Class%20Diagram.pdf?csf=1&web=1&e=HhLV0f)
 
-    - [Sequence Diagrams](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Sequence%20Diagrams?csf=1&web=1&e=HxWv17)
+    - [Complete Sequence Diagrams](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Sequence%20Diagrams?csf=1&web=1&e=HxWv17)
 
-    - [Dialog Map](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Dialog%20Map.png?csf=1&web=1&e=bvcLBK)
+    - [Complete Dialog Map](https://entuedu.sharepoint.com/:i:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/Design%20Model/Dialog%20Map.png?csf=1&web=1&e=06UEvn)
 
 - [System Architecture](https://entuedu.sharepoint.com/:p:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/System%20Architecture.pptx?d=w1d87e718b3cc4c21ac56a06d2eef4520&csf=1&web=1&e=YOvmQj)
 
