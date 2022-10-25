@@ -41,7 +41,7 @@
 - Application Skeleton (in folder 'frontend' of this repository)
 
 ## Lab 4
-- [Test Cases and Results] (https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%204?csf=1&web=1&e=0skrGf)
+- [Test Cases and Results](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%204?csf=1&web=1&e=0skrGf)
 
 ## Lab 5
 - [SRS Documentation](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%205?csf=1&web=1&e=qJ8nhe)
