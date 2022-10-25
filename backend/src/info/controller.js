@@ -206,7 +206,7 @@ const removeProduct = (req, res) => {
 const removeList = (req, res) => {
   const { userid, list } = req.body;
 
-  pool.query(queries.checkUserlistExists, [userid, list], (error, results) => {
+  pool.query(queries.checkOnlyListExists, [userid, list], (error, results) => {
     if (!results.rows.length) {
       res.send("Cannot remove list which has not been added yet!");
     }

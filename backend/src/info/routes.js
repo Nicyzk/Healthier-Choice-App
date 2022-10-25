@@ -20,8 +20,8 @@ router.delete("/userpreference/:userid", controller.removePreference);
 router.get("/userlists/:userid", controller.getUserlistsbyId);
 router.post("/userlists", controller.addUserlist);
 router.post("/userlists/createlist", controller.createList);
-router.delete("/userlists/removeproduct/:userid", controller.removeProduct);
-router.delete("/userlists/removelist/:userid", controller.removeList);
+router.delete("/userlists/removeproduct", controller.removeProduct);
+router.delete("/userlists/removelist", controller.removeList);
 
 // For products table in DB
 // 
