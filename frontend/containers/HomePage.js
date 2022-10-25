@@ -8,7 +8,7 @@ import DropdownSingle from '../components/dropdown-single';
 import { typeOptions, healthyChoicesOptions } from '../consts/constants'
 import React from 'react';
 
-const images = { 1: require('../assets/image1.png'), 2: require('../assets/image2.png') }
+const images = { 1: require('../assets/image1.png'), 2: require('../assets/Strawberry.png') }
 
 const HomePage = ({ navigation }) => {
     const [showFilter, setShowFilter] = useState(false);
