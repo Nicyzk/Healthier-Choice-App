@@ -39,3 +39,9 @@
 - [System Architecture](https://entuedu.sharepoint.com/:p:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%203/System%20Architecture.pptx?d=w1d87e718b3cc4c21ac56a06d2eef4520&csf=1&web=1&e=YOvmQj)
 
 - Application Skeleton (in folder 'frontend' of this repository)
+
+## Lab 4
+- [Test Cases and Results] (https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%204?csf=1&web=1&e=0skrGf)
+
+## Lab 5
+- [SRS Documentation](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%205?csf=1&web=1&e=qJ8nhe)
