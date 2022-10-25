@@ -3,7 +3,7 @@ import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
 import MyProfilePage from './containers/MyProfilePage'
 import MyLists from './containers/MyLists'
-import infoPage from './containers/infoPage'
+import infoPage from './containers/InfoPage'
 import MapPage from './containers/MapPage'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
