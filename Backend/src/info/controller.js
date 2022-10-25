@@ -1,4 +1,3 @@
-const { connectableObservableDescriptor } = require("rxjs/internal/observable/ConnectableObservable");
 const pool = require("../../db");
 const queries = require("./queries");
 
