@@ -261,7 +261,7 @@ const getProductsbyAll = (req, res) => {
   let str = "SELECT * FROM products WHERE ";
   const keywords = req.body.keywords;
   for (let kw of keywords) {
-    str += `brand LIKE ('%${kw}%') OR productdescription LIKE ('%${kw}%') OR subcategory LIKE ('%${kw}%') OR `
+    str += `productname LIKE ('%${kw}%') OR productdescription LIKE ('%${kw}%') OR subcategory LIKE ('%${kw}%') OR `
   }
   str = str.slice(0,-4)
   pool.query(str, (error, results) => {
