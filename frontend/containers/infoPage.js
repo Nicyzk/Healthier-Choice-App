@@ -14,7 +14,7 @@ const App = () => {
     <View className="p-4 flex-1 bg-white" >
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-       <Text className="text-2xl text-center font-bold m-1 mt-12 ">Common HCS Taglines</Text>
+       <Text className="text-2xl text-center font-bold m-1 mt-8 ">Common HCS Taglines</Text>
        <Text className="text-1xl text-center ">Click to find out more!</Text>
         
         <View style={styles.normalView}>
