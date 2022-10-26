@@ -18,7 +18,7 @@ const removePreference =
 
 //For userlists table
 
-const getUserlistsbyId = "SELECT * FROM userlists WHERE userid = $1";
+const getUserlistsbyId = "SELECT * FROM userlists WHERE userid = $1 AND productid IS NOT NULL";
 const checkUserlistExists =
   "SELECT (userid, list, productid) FROM userlists WHERE (userid = $1 AND list = $2 AND productid = $3)";
 const addUserlist =
