@@ -256,9 +256,9 @@ const getProductsbySubcategory = (req, res) => {
 };
 
 const getProductsbyAll = (req, res) => {
-
+  const searchstring = req.params.searchstring;
   let str = "SELECT * FROM products WHERE ";
-  const keywords = req.body.keywords;
+  const keywords = searchstring.split(" ");
   for (let kw of keywords) {
     str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `
   }
