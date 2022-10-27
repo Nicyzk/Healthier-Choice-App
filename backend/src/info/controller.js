@@ -260,7 +260,7 @@ const getProductsbyAll = (req, res) => {
   let str = "SELECT * FROM products WHERE ";
   const keywords = req.body.keywords;
   for (let kw of keywords) {
-    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR `
+    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `
   }
   str = str.slice(0,-4)
   pool.query(str, (error, results) => {
