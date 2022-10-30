@@ -6,9 +6,6 @@ import UploadImage from '../components/UploadImage';
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { ListOptions } from '../consts/constants'
-import DropdownMulti from '../components/dropdown-multi'
-
 
 const SUGAR = [
     { label: 'No Added Sugar', value: '1' },

@@ -1,5 +1,5 @@
 
-import NavBar from '../components/navBar';
+import NavBar from '../components/NavBar';
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView, SafeAreaView} from "react-native";
 import FaIcon from 'react-native-vector-icons/FontAwesome'
