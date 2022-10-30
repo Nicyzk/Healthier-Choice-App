@@ -22,7 +22,7 @@ const Navbar = () => {
                 
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => {
-                navigation.navigate('infoPage');
+                navigation.navigate('InfoPage');
                 }}>
                 <View className="px-0 ml-2">
                     <FaIcon

@@ -6,7 +6,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import Fa5Icon from 'react-native-vector-icons/FontAwesome5'
 
 
-const App = () => {
+const App = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [actionTriggered, setActionTriggered] = useState(''); // here we go
 

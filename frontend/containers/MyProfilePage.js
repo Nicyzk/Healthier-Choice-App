@@ -6,19 +6,10 @@ import UploadImage from '../components/UploadImage';
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import { ListOptions } from '../consts/constants'
-import DropdownMulti from '../components/dropdown-multi'
-
-useEffect(() => {
-    if (showFilter) setTypes([1])
-}, [showFilter])
-const onFilterBtnClicked = () => {
-    setShowFilter(false)
-}
 
 const SUGAR = [
     { label: 'No Added Sugar', value: '1' },
-    { label: 'Less Sugar', value: '2' },
+    { label: 'Lower in Sugar', value: '2' },
     { label: 'Sugar Free', value: '3' },
 ];
 
@@ -27,10 +18,31 @@ const FAT = [
     { label: 'Tras Fat Free', value: '5'}
 ];
 
-const CARBO = [
-    { label: 'Low Glycemic Index', value: '6'},
-    { label: 'Higher in Wholegrains', value: '7'}
-]
+const CALORIES = [
+    { label: 'Less than 100 calories', value: '6'},
+    { label: 'Less than 200 calories', value: '7'}
+];
+
+const SODIUM = [
+    {label: 'Lower in Sodium', value: '8'},
+    {label: 'No Added Sodium', value: '9'}
+];
+
+const CALCIUM = [
+    {label: 'Higher in Calcium', value: '10'}
+];
+
+const WHOLEGRAINS = [
+    {label: 'Higher in Wholegrains', value: '11'}
+];
+
+const BLOODSUGAR = [
+    {label: 'Low Glycemic Index', value: '12'}
+];
+
+const FRUITSVEGES = [
+    {label: 'Eat 2+2 Servings of Fruits and Vegetables Daily', value: '13'}
+];
 
 
 const MyProfilePage = ({navigation}) => {
@@ -95,10 +107,50 @@ const MyProfilePage = ({navigation}) => {
         );
     };
 
-    const renderCarboItem = (item3) => {
+    const renderCalorieItem = (item3) => {
         return (
             <View style={style.item}>
                 <Text style={style.selectedTextStyle}>{item3.label}</Text>
+            </View>
+        );
+    };
+
+    const renderSodiumItem = (item4) => {
+        return (
+            <View style={style.item}>
+                <Text style={style.selectedTextStyle}>{item4.label}</Text>
+            </View>
+        );
+    };
+
+    const renderCalciumItem = (item4) => {
+        return (
+            <View style={style.item}>
+                <Text style={style.selectedTextStyle}>{item4.label}</Text>
+            </View>
+        );
+    };
+
+    const renderWholegrainsItem = (item4) => {
+        return (
+            <View style={style.item}>
+                <Text style={style.selectedTextStyle}>{item4.label}</Text>
+            </View>
+        );
+    };
+
+    const renderBloodSugarItem = (item4) => {
+        return (
+            <View style={style.item}>
+                <Text style={style.selectedTextStyle}>{item4.label}</Text>
+            </View>
+        );
+    };
+
+    const renderFruitsVegesItem = (item4) => {
+        return (
+            <View style={style.item}>
+                <Text style={style.selectedTextStyle}>{item4.label}</Text>
             </View>
         );
     };
@@ -184,7 +236,7 @@ const MyProfilePage = ({navigation}) => {
             <StatusBar />
         </View>
             
-            <Image style={style.HCScarbo} source={require('../assets/brown-rice.png')} />
+            <Image style={style.HCScarbo} source={require('../assets/meal.png')} />
             <View style={style.MultiContainer3}>
             <MultiSelect
                 style={style.dropdown}
@@ -192,17 +244,172 @@ const MyProfilePage = ({navigation}) => {
                 selectedTextStyle={style.selectedTextStyle}
                 inputSearchStyle={style.inputSearchStyle}
                 iconStyle={style.iconStyle}
-                data={CARBO}
+                data={CALORIES}
                 labelField="label"
                 valueField="value"
-                placeholder="Carbohydrate Categories"
+                placeholder="Calories Categories"
                 value={selected}
                 search
                 searchPlaceholder="Search..."
                 onChange={item3 => {
                     setSelected(item3);
                 }}
-                renderItem={renderFatItem}
+                renderItem={renderCalorieItem}
+                renderSelectedItem={(item3, unSelect) => (
+                    <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
+                        <View style={style.selectedStyle}>
+                            <Text style={style.textSelectedStyle}>{item3.label}</Text>
+                            <AntDesign color="black" name="delete" size={17} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+            />
+            <StatusBar />
+        </View>
+
+        <Image style={style.HCSsodium} source={require('../assets/no-salt.png')} />
+        <View style={style.MultiContainer4}>
+            <MultiSelect
+                style={style.dropdown}
+                placeholderStyle={style.placeholderStyle}
+                selectedTextStyle={style.selectedTextStyle}
+                inputSearchStyle={style.inputSearchStyle}
+                iconStyle={style.iconStyle}
+                data={SODIUM}
+                labelField="label"
+                valueField="value"
+                placeholder="Sodium Categories"
+                value={selected}
+                search
+                searchPlaceholder="Search..."
+                onChange={item3 => {
+                    setSelected(item3);
+                }}
+                renderItem={renderSodiumItem}
+                renderSelectedItem={(item3, unSelect) => (
+                    <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
+                        <View style={style.selectedStyle}>
+                            <Text style={style.textSelectedStyle}>{item3.label}</Text>
+                            <AntDesign color="black" name="delete" size={17} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+            />
+            <StatusBar />
+        </View>
+
+        <Image style={style.HCScalcium} source={require('../assets/milk.png')} />
+        <View style={style.MultiContainer5}>
+            <MultiSelect
+                style={style.dropdown}
+                placeholderStyle={style.placeholderStyle}
+                selectedTextStyle={style.selectedTextStyle}
+                inputSearchStyle={style.inputSearchStyle}
+                iconStyle={style.iconStyle}
+                data={CALCIUM}
+                labelField="label"
+                valueField="value"
+                placeholder="Calcium Categories"
+                value={selected}
+                search
+                searchPlaceholder="Search..."
+                onChange={item3 => {
+                    setSelected(item3);
+                }}
+                renderItem={renderCalciumItem}
+                renderSelectedItem={(item3, unSelect) => (
+                    <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
+                        <View style={style.selectedStyle}>
+                            <Text style={style.textSelectedStyle}>{item3.label}</Text>
+                            <AntDesign color="black" name="delete" size={17} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+            />
+            <StatusBar />
+        </View>
+
+        <Image style={style.HCSwholegrains} source={require('../assets/brown-rice.png')} />
+        <View style={style.MultiContainer6}>
+            <MultiSelect
+                style={style.dropdown}
+                placeholderStyle={style.placeholderStyle}
+                selectedTextStyle={style.selectedTextStyle}
+                inputSearchStyle={style.inputSearchStyle}
+                iconStyle={style.iconStyle}
+                data={WHOLEGRAINS}
+                labelField="label"
+                valueField="value"
+                placeholder="Wholegrains Categories"
+                value={selected}
+                search
+                searchPlaceholder="Search..."
+                onChange={item3 => {
+                    setSelected(item3);
+                }}
+                renderItem={renderWholegrainsItem}
+                renderSelectedItem={(item3, unSelect) => (
+                    <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
+                        <View style={style.selectedStyle}>
+                            <Text style={style.textSelectedStyle}>{item3.label}</Text>
+                            <AntDesign color="black" name="delete" size={17} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+            />
+            <StatusBar />
+        </View>
+
+        <Image style={style.HCSbloodsugar} source={require('../assets/blood.png')} />
+        <View style={style.MultiContainer7}>
+            <MultiSelect
+                style={style.dropdown}
+                placeholderStyle={style.placeholderStyle}
+                selectedTextStyle={style.selectedTextStyle}
+                inputSearchStyle={style.inputSearchStyle}
+                iconStyle={style.iconStyle}
+                data={BLOODSUGAR}
+                labelField="label"
+                valueField="value"
+                placeholder="Blood Sugar Categories"
+                value={selected}
+                search
+                searchPlaceholder="Search..."
+                onChange={item3 => {
+                    setSelected(item3);
+                }}
+                renderItem={renderBloodSugarItem}
+                renderSelectedItem={(item3, unSelect) => (
+                    <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
+                        <View style={style.selectedStyle}>
+                            <Text style={style.textSelectedStyle}>{item3.label}</Text>
+                            <AntDesign color="black" name="delete" size={17} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+            />
+            <StatusBar />
+        </View>
+
+        <Image style={style.HCSfruits} source={require('../assets/fruits-and-vegetables.png')} />
+        <View style={style.MultiContainer8}>
+            <MultiSelect
+                style={style.dropdown}
+                placeholderStyle={style.placeholderStyle}
+                selectedTextStyle={style.selectedTextStyle}
+                inputSearchStyle={style.inputSearchStyle}
+                iconStyle={style.iconStyle}
+                data={FRUITSVEGES}
+                labelField="label"
+                valueField="value"
+                placeholder="Fruits & Vegetables Categories"
+                value={selected}
+                search
+                searchPlaceholder="Search..."
+                onChange={item3 => {
+                    setSelected(item3);
+                }}
+                renderItem={renderFruitsVegesItem}
                 renderSelectedItem={(item3, unSelect) => (
                     <TouchableOpacity onPress={() => unSelect && unSelect(item3)}>
                         <View style={style.selectedStyle}>
@@ -239,6 +446,8 @@ const MyProfilePage = ({navigation}) => {
                     <View style={{backgroundColor:"#EBE8FC",flex:2,padding:5}}></View>
                     <SelectList setSelected={setSelected3} data={data3} />
                 </View>
+
+                
 
             </ScrollView>
                 </SafeAreaView>
@@ -314,8 +523,8 @@ const style = StyleSheet.create({
         right: -20
     },
     HCScarbo:{
-        width: 65,
-        height: 65,
+        width: 60,
+        height: 60,
         right: -7,
         top: -75
     },
@@ -330,6 +539,36 @@ const style = StyleSheet.create({
         height: 65,
         right: 0,
         top:-40
+    },
+    HCSsodium:{
+        width: 65,
+        height: 65,
+        right: 0,
+        top: -110
+    },
+    HCScalcium:{
+        width: 60,
+        height: 60,
+        right: 0,
+        top: -140
+    },
+    HCSwholegrains:{
+        width: 65,
+        height: 65,
+        right: 0,
+        top: -170
+    },
+    HCSbloodsugar:{
+        width: 60,
+        height: 60,
+        right: 0,
+        top: -200
+    },
+    HCSfruits:{
+        width: 60,
+        height: 60,
+        right: 0,
+        top: -230
     },
     Sugars:{
         color: "black",
@@ -479,6 +718,36 @@ const style = StyleSheet.create({
         flex:1,
         right:-30,
         top:-135
+    },
+    MultiContainer4: {
+        paddingHorizontal: 40,
+        flex:1,
+        right:-30,
+        top:-170
+    },
+    MultiContainer5: {
+        paddingHorizontal: 40,
+        flex:1,
+        right:-30,
+        top:-200
+    },
+    MultiContainer6: {
+        paddingHorizontal: 40,
+        flex:1,
+        right:-30,
+        top:-230
+    },
+    MultiContainer7:{
+        paddingHorizontal: 40,
+        flex:1,
+        right:-30,
+        top:-260
+    },
+    MultiContainer8:{
+        paddingHorizontal: 40,
+        flex:1,
+        right:-30,
+        top:-290
     },
     dropdown: {
         height: 50,
