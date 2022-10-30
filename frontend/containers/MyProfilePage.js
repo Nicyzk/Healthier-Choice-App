@@ -2,9 +2,14 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAre
 import React,{useState} from 'react';
 import SelectList from 'react-native-dropdown-select-list';
 import UploadImage from '../components/UploadImage';
+import NavBar from '../components/navBar';
 
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+
+import { ListOptions } from '../consts/constants'
+import DropdownMulti from '../components/dropdown-multi'
+import Navbar from '../components/navBar';
 
 
 const SUGAR = [
@@ -94,10 +99,23 @@ const MyProfilePage = ({navigation}) => {
         );
     };
     
+{/* <View className="p-4 flex-1 bg-white" >
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+       <Text className="text-2xl text-center font-bold m-1 mt-8 ">Common HCS Taglines</Text>
+       <Text className="text-1xl text-center ">Click to find out more!</Text> */}
+
+
+
+
     return(
-    <View style ={style.background} >
+    <View className = "p-4 flex-4 bg-white" >
+        <View style = {styles.scroll}>
+        <ScrollView>
+        
+        <Text className="text-2xl text-center font-bold m-1 mt-8 mb-5 ">My Profile Page</Text>
         <View style={style.UsernameCon}>
-        <TextInput style={style.Username} type="search" id="default-search" className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Username" required></TextInput>
+        <TextInput style={style.Username} type="search" id="default-search" className="block p-3 pl-8 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Username" required></TextInput>
         </View>
         <View style={style.ImageCon}>
                 <UploadImage/>
@@ -107,7 +125,7 @@ const MyProfilePage = ({navigation}) => {
     <SafeAreaView style={style.container2}>
         <ScrollView style={style.rectangle2}>
             
-        <Button style={ style.UpdatePreferences} title= "My Preferences" color = "#B19CD7" fontWeight = 'bold'
+        <Button style={style.UpdatePreferences} title= "My Preferences" color = "#B19CD7" fontWeight = 'bold'
                 onPress={() => Alert.alert("Would you like to change your preferences?", "Click yes to make changes, No to cancel",
                 [ {text: "Yes", onPress:()=> console.log("link to edit page")}
                     ,{ text: "No"}] )}></Button>
@@ -234,6 +252,9 @@ const MyProfilePage = ({navigation}) => {
             </ScrollView>
                 </SafeAreaView>
 
+    </ScrollView>
+    </View>
+    <Navbar></Navbar>
     </View>
     )
 }
@@ -265,18 +286,20 @@ const style = StyleSheet.create({
         top: -100,
       },
     rectangle2:{
-        top: -30,
-        right:-20,
+        top: -20,
+        right: 0,
         backgroundColor: "#EBE8FC", 
-        width: 375,
-        height: 100
+        width: 360,
+        height: 80,
+        borderRadius: 20
     },
     rectangle3:{
         backgroundColor: "#EBE8FC", 
-        width: 375,
-        height: 50,
+        width: 360,
+        height: 80,
         top: 0,
-        right: -20
+        right: 0,
+        borderRadius: 20
     },
     ProfilePic:{
         width: 100,
@@ -292,12 +315,12 @@ const style = StyleSheet.create({
     container2: {
         paddingTop: StatusBar.currentHeight,
         width: 375,
-        height: 400
+        height: 300
       },
     container3: {
         paddingTop: StatusBar.currentHeight,
-        width: 375,
-        height: 200
+        width: 350,
+        height: 300
     },
     InBoxText:{
         color: "#B19CD7",
@@ -454,26 +477,26 @@ const style = StyleSheet.create({
         top: -105
     },
     MultiContainer1: {
-        paddingHorizontal: 40,
+        paddingHorizontal: 50,
         flex:1,
         right:-30,
         top:-60
     },
     MultiContainer2: {
-        paddingHorizontal: 40,
+        paddingHorizontal: 50,
         flex:1,
         right:-30,
         top:-100
     },
     MultiContainer3: {
-        paddingHorizontal: 40,
+        paddingHorizontal: 50,
         flex:1,
         right:-30,
         top:-135
     },
     dropdown: {
         height: 50,
-       backgroundColor:'#B19CD7',
+        backgroundColor:'#B19CD7',
         borderRadius: 12,
         padding: 12,
         shadowColor: '#000',
@@ -666,3 +689,95 @@ CAN REMOVE THE OLD SUGAR BUTTON CONTAINERS
                 <Text style={style.buttonSugar}>Higher in Wholegrains</Text>
             </TouchableOpacity>
             </View>*/
+
+            const styles = StyleSheet.create({
+  
+                normalView: {
+                  marginTop: 20,
+                  alignItems: "center",
+                },
+
+                scroll: {
+                  },
+
+                centeredView: {
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 3
+                },
+                modalView: {
+                  marginTop: 20,
+                  backgroundColor: "#4169e1",
+                  borderRadius: 20,
+                  padding:10,
+                  alignItems: "center",
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 4,
+                  elevation: 5
+                },
+                button: {
+                  marginBottom: 20,
+                  borderRadius: 20,
+                  width:'80%',
+                  padding: 10,
+                  borderWidth:3,
+                  borderColor:'rgba(0, 0, 0, 0.1)',
+                },
+                container: {
+                  flex: 1,
+                },
+              
+                innerbox: {
+                  marginTop:10,
+                  borderRadius: 10,
+                  backgroundColor: "#463EC633",
+                  width:350,
+                  padding: 10,
+                  borderWidth:3,
+                  borderColor:'rgba(0, 0, 0, 0.1)',
+                },
+                buttonOpen: {
+                  backgroundColor: "#463EC633",
+                },
+                buttonClose: {
+                  marginTop: 10,
+                  backgroundColor: "#FFFFFF",
+                },
+                textStyle: {
+                  color: "black",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  fontSize: 20,
+                  left: 15
+                  
+                },
+              
+                textStyle1: {
+                  color: "black",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  fontSize: 20,
+                  left: 24
+                  
+                },
+                textnormal: {
+                  color: "black",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  fontSize: 15,
+                },
+                scrollView: {
+                  backgroundColor: 'white',
+                  marginHorizontal: 0,
+                },
+                modalText: {
+                  marginBottom: 15,
+                  textAlign: "center"
+                }
+              });

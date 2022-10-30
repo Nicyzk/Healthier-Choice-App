@@ -206,7 +206,7 @@ const removeProduct = (req, res) => {
 const removeList = (req, res) => {
   const { userid, list } = req.body;
 
-  pool.query(queries.checkUserlistExists, [userid, list], (error, results) => {
+  pool.query(queries.checkOnlyListExists, [userid, list], (error, results) => {
     if (!results.rows.length) {
       res.send("Cannot remove list which has not been added yet!");
     }
@@ -256,11 +256,11 @@ const getProductsbySubcategory = (req, res) => {
 };
 
 const getProductsbyAll = (req, res) => {
-
+  const searchstring = req.params.searchstring;
   let str = "SELECT * FROM products WHERE ";
-  const keywords = req.body.keywords;
+  const keywords = searchstring.split(" ");
   for (let kw of keywords) {
-    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR `
+    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `
   }
   str = str.slice(0,-4)
   pool.query(str, (error, results) => {
