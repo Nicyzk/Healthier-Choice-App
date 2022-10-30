@@ -2,7 +2,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import IoIcon from 'react-native-vector-icons/Ionicons'
 import { View, TextInput } from 'react-native';
 
-const SearchBar = ({ showFilter, setShowFilter }) => {
+const SearchBar = ({ searchText, setSearchText, search, showFilter, setShowFilter }) => {
 
     return (
         <View className="m-4 w-11/12 flex-row justify-center justify-between bg-gray-50 rounded-lg border border-gray-300" style={{ elevation: 2 }}>
@@ -10,9 +10,11 @@ const SearchBar = ({ showFilter, setShowFilter }) => {
                 name="search"
                 className='h-12 bg-gray-50'
                 color="black"
-                onPress={() => { }}
+                onPress={search}
             ></FaIcon.Button></View>
             <TextInput type="search" className="w-7/12" selectionColor={'black'}
+                onChangeText={setSearchText}
+                value={searchText}
                 placeholder="Search..." required>
             </TextInput>
             <View className="w-2/12 justify-center"><IoIcon.Button

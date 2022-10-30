@@ -3,7 +3,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import { Animated, Image, View, Text, ScrollView, TouchableWithoutFeedback, Modal, StyleSheet, Pressable } from 'react-native'
 import SelectList from 'react-native-dropdown-select-list'
 import { ListOptions } from '../consts/constants'
-import DropdownMulti from '../components/dropdown-multi'
+import DropdownMulti from './Dropdown-multi'
 
 const Carousel = ({ images, navigation }) => {
 
@@ -11,7 +11,7 @@ const Carousel = ({ images, navigation }) => {
     const [modalVisible, setModalVisible] = useState(false); //EDITED IN
     const [selected, setSelected] = React.useState(true);
   
-    const data = [{value:'Groceries'}, {value:'Beverages'},{value:'Snacks'} ];
+    const data = [{value:'Groceries'}, {value:'Beverages'},{value:'Snacks'}, {value:'Groceries'}, {value:'Beverages'},{value:'Snacks'}];
     
 
     for (let key in images) {
@@ -61,7 +61,7 @@ const Carousel = ({ images, navigation }) => {
         <View style={styles.centeredView}>
         <View style={styles.modalView}>
             <Text style={styles.modalText}>Save item to...</Text>
-            <SelectList setSelected={setSelected} data={data} />
+            <SelectList style = {styles.list1} setSelected={setSelected} data={data} />
             <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}
@@ -81,13 +81,14 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       marginTop: 22,
-      paddingHorizontal:50
+      paddingHorizontal:50,
     },
     modalView: {
-      margin: 20,
+      marginTop: 30,
+      paddingHorizontal:50,
       backgroundColor: "white",
       borderRadius: 20,
-      padding: 35,
+      padding: 20,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -103,7 +104,9 @@ const styles = StyleSheet.create({
       padding: 10,
       elevation: 2,
       top:10
+      
     },
+
     buttonOpen: {
       backgroundColor: "#F194FF",
     },

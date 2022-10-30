@@ -1,20 +1,38 @@
 import { View, Text, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import SearchBar from '../components/searchBar'
-import NavBar from '../components/navBar'
-import Carousel from '../components/carousel'
+import SearchBar from '../components/SearchBar'
+import NavBar from '../components/NavBar'
+import Carousel from '../components/Carousel'
+// import CarouselNew from '../components/Carousel_new'
 import { useEffect, useState } from 'react'
-import DropdownMulti from '../components/dropdown-multi'
-import DropdownSingle from '../components/dropdown-single';
+import DropdownMulti from '../components/Dropdown-multi'
+import DropdownSingle from '../components/Dropdown-single';
 import { typeOptions, healthyChoicesOptions } from '../consts/constants'
 import React from 'react';
+import axios from 'axios'
 
-const images = { 1: require('../assets/image1.png'), 2: require('../assets/image2.png') }
+const images = { 1: require('../assets/vitagen.png'), 2: require('../assets/strawberry.png') }
 
 const HomePage = ({ navigation }) => {
     const [showFilter, setShowFilter] = useState(false);
     const [types, setTypes] = useState([])
     const [healthyChoices, setHealthyChoices] = useState({})
+    const [searchResults, setSearchResults] = useState([])
+    const [searchText, setSearchText] = useState("")
+    const [recommendedProductDetails, setRecommendedProductDetails] = useState([])
 
+    // Filter Function
+    const onFilterBtnClicked = () => {
+        setShowFilter(!showFilter)
+    }
+
+    const filter = async () => {
+        const keywords = types
+        for (let i in healthyChoices) {
+            keywords.push(healthyChoices[i])
+        }
+        console.log(keywords)
+        // await search(keywords) // updates searchResult
+    }
 
     const renderFilter = () => {
         const healthFilters = []
@@ -23,7 +41,7 @@ const HomePage = ({ navigation }) => {
             healthFilters.push(
                 <View className="my-2" key={key} style={{ zIndex: 10 - i }}>
                     <DropdownSingle
-                        style={{ zIndex: 10-i }}
+                        style={{ zIndex: 10 - i }}
                         options={healthyChoicesOptions[key]}
                         value={healthyChoices} // Ex: {'Sugar': 'low in sugar'}
                         value_key={key}
@@ -47,20 +65,24 @@ const HomePage = ({ navigation }) => {
                     <View className="w-80 rounded-xl p-8 bg-white">
                         <Text className='text-2xl font-bold text-center'>Filter by category</Text>
                         <View className="my-4" style={{ zIndex: 20 }}>
-                            <Text className="font-bold">Type:</Text>
+                            <Text className="font-bold pb-1">Type:</Text>
                             <DropdownMulti options={typeOptions} value={types} setValue={setTypes} />
                         </View>
                         <View>
                             <Text className="font-bold">Health Filter: </Text>
                             <ScrollView className='h-1/2'>
                                 {healthFilters}
+                                <View className='h-32'></View>
                             </ScrollView>
                         </View>
                         <View className="py-2" >
                             <TouchableOpacity
                                 className="rounded-3xl justify-center bg-indigo-500 active:bg-indigo-600"
                                 activeOpacity={1.0}
-                                onPress={onFilterBtnClicked}>
+                                onPress={() => {
+                                    filter()
+                                    setShowFilter(false)
+                                }}>
                                 <Text className="py-4 text-center text-lg text-white">Done</Text>
                             </TouchableOpacity>
                         </View>
@@ -71,18 +93,62 @@ const HomePage = ({ navigation }) => {
         )
     }
 
+    // Search Function
+    const search = async (kw) => {
+        try {
+            const keywords = kw.split(' ')
+            console.log(keywords)
+            // TO EDIT
+            // const results = await axios.post("https://hcs-backend.onrender.com/api/search/all", { keywords })
+            const updatedResults = []
+            updatedResults.push({
+                "productid": 5,
+                "productname": "Afiat Premium Corn Oil 2L",
+                "productdescription": "tester description 5",
+                "subcategory": "Lower in Saturated Fat",
+                "location": "NTUC",
+                "imgFile": "vitagen.png"
+            }) // Testing Only!!
+            setSearchResults(updatedResults)
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    useEffect(() => { if (searchResults.length > 0) renderSearchResults(); }, [searchResults])
+
+    const renderSearchResults = () => (
+        <>
+            <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Search Results</Text>
+            <Carousel images={images} navigation={navigation}></Carousel>
+        </>
+    )
+
+    // Get recommended products
+    // useEffect(() => {
+    // }, [])
+    // const getRecommendedProducts = async () => {
+    //     const results = await axios.get('https://hcs-backend.onrender.com/api/search/')
+    // }
+    
+
     return (
         <>
             <View className="p-4 flex-1 bg-white" >
-                <Text className="text-2xl text-center font-bold m-4 py-4 ">Healthier Choices Near You</Text>
-                <SearchBar showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
-                <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Recommended</Text>
-                <Carousel images={images} navigation={navigation}></Carousel>
+                <Text className="text-2xl text-center font-bold m-4 py-4">Healthier Choices Near You</Text>
+                <SearchBar searchText={searchText} setSearchText={setSearchText} search={() => search(searchText)} showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
+                <ScrollView>
+                    {searchResults.length > 0 ? renderSearchResults() : null}
+                    <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Recommended</Text>
+                    <Carousel images={images} navigation={navigation}></Carousel>
+                    {/* <CarouseNew products={products} onBasketClicked={() => {}}></CarouseNew> */}
+                    <View className='h-12'></View>
+                </ScrollView>
                 <NavBar></NavBar>
             </View>
             {showFilter ? renderFilter() : null}
 
-        </>   
+        </>
     )
 
 }

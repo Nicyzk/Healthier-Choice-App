@@ -3,13 +3,13 @@ const drinks = [
       id: 1,
       name: 'Vitagen',
       HCS: 'Low in Sugar',
-      img: require('../assets/Vitagen.png'), //include pic??
+      img: require('../assets/vitagen.png'), //include pic??
     },
     {
         id: 2,
         name: 'Strawberry milk',
         HCS: 'Low in Sugar',
-        img: require('../assets/Strawberry.png'), //include pic??
+        img: require('../assets/strawberry.png'), //include pic??
       },
 ];
 
@@ -56,6 +56,6 @@ const healthyChoicesOptions = {
   ], 
 }
 
-const PLACES_API_KEY = ''
+const PLACES_API_KEY = 'AIzaSyCzkeBRa-8_C-fufLRLR1L7AnKaeqX0S90'
 
 module.exports = { colors, drinks, typeOptions, healthyChoicesOptions, PLACES_API_KEY };
