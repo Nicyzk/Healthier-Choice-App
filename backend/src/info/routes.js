@@ -32,7 +32,7 @@ router.get(
   "/search/subcategory/:subcategory",
   controller.getProductsbySubcategory
 );
-router.get("/search/all", controller.getProductsbyAll)
+router.post("/search/all", controller.getProductsbyAll)
 
 // For hcs_categories table
 
