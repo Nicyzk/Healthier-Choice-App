@@ -2,14 +2,13 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAre
 import React,{useState} from 'react';
 import SelectList from 'react-native-dropdown-select-list';
 import UploadImage from '../components/UploadImage';
-import NavBar from '../components/navBar';
+import Navbar from '../components/NavBar';
 
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { ListOptions } from '../consts/constants'
-import DropdownMulti from '../components/dropdown-multi'
-import Navbar from '../components/navBar';
+import DropdownMulti from '../components/Dropdown-multi'
 
 
 const SUGAR = [
