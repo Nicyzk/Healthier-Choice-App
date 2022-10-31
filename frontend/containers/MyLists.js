@@ -1,11 +1,36 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import SearchBar from '../components/SearchBar'
+import NavBar from '../components/NavBar';
+import Modal from '../components/Modal'
+import axios from 'axios'
+import { useNavigation } from '@react-navigation/native';
 
+export default function MyLists() {
+  const [lists, setLists] = useState({})  // { shoppinglist1: [1,13,...] }
+  const [showModal, setShowModal] = useState(false)
+  const [newListName, setNewListName] = useState("")
+  const [errMsg, setErrMsg] = useState("")
 
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import Button from '../components/Button'
-import SearchBar from '../components/searchBar'
-import styles from '../components/ButtonStyles';
-import NavBar from '../components/navBar';
+  const navigation = useNavigation()
+
+  useEffect(() => {
+    getLists()
+  }, [showModal])
+
+  const getLists = async () => {
+    try {
+      const results = await axios.get("https://hcs-backend.onrender.com/api/userlists/2")
+      const updatedLists = {}
+      for (let el of results.data) {
+        if (!updatedLists[el.list]) updatedLists[el.list] = []
+        if (el.productid != null) updatedLists[el.list].push(el.productid)
+      }
+      setLists(updatedLists)
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   const renderLists = () => {
     const rendered = []
