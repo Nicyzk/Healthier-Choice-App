@@ -260,6 +260,10 @@ const getProductsbyAll = (req, res) => {
   let str = "SELECT * FROM products WHERE ";
   const keywords = searchstring.split(" ");
   for (let kw of keywords) {
+    if (kw == "*") {
+      str = "SELECT * FROM products OR ";
+      break;
+    }
     str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `
   }
   str = str.slice(0,-4)
