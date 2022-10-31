@@ -45,3 +45,4 @@
 
 ## Lab 5
 - [SRS Documentation](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%205?csf=1&web=1&e=qJ8nhe)
+- [Presentation Slides](https://entuedu.sharepoint.com/:p:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%205/Live%20Demo%20.pptx?d=w9518d888a3234f17aa663f4988aff6f4&csf=1&web=1&e=FGwhZR)
