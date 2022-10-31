@@ -6,6 +6,7 @@ import axios from 'axios'
 import FaIcon from 'react-native-vector-icons/FontAwesome'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { preferenceSettings } from '../consts/constants';
+import Modal from '../components/Modal'
 
 
 const MyProfilePage = () => {
@@ -13,10 +14,16 @@ const MyProfilePage = () => {
     const [selectedPreference, setSelectedPreference] = useState(null)
     const [openSugarDropdown, setOpenSugarDropdown] = useState(false)
     const [openFatDropdown, setOpenFatDropdown] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [errMsg, setErrMsg] = useState("")
 
     useEffect(() => {
         getPreferences()
-    }, [])
+    }, [loading])
+
+    useEffect(() => {
+        console.log(selectedPreference)
+    }, [selectedPreference])
 
     const getPreferences = async () => {
         try {
@@ -25,22 +32,37 @@ const MyProfilePage = () => {
             for (let p of results.data) {
                 preferences.push(p.preference)
             }
-            console.log("hi1")
-            console.log(preferences)
             setUserPreferences(preferences)
         } catch (err) {
             console.log(err.message)
         }
     }
 
-    const removePreference = () => {
+    const addPreference = async () => {
+        try {
+            setLoading(true)
+            const results = await axios.post('https://hcs-backend.onrender.com/api/userpreference', { userid: 2, preference: selectedPreference })
+            if (typeof results.data == 'string') throw new Error(results.data)
+            setLoading(false)
+        } catch (err) {
+            setErrMsg(err.message)
+        }
+        
+    }
 
+    const removePreference = async(p) => {
+        try {
+            setLoading(true)
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userpreference/2', { userid: 2, preference: p })
+            if (typeof results.data == 'string') throw new Error(results.data)
+            setLoading(false)
+        } catch (err) {
+            setErrMsg(err.message)
+        }
     }
 
     const renderPreferences = () => {
         const toRender = []
-        console.log('hi')
-        console.log(userPreferences)
         for (let p of userPreferences) {
             toRender.push(
                 <View className='bg-white m-2 h-8 flex-1 flex-row justify-evenly items-center'>
@@ -49,7 +71,10 @@ const MyProfilePage = () => {
                         name="remove"
                         color="red"
                         size={20}
-                        onPress={() => removePreference()}
+                        onPress={() => {
+                            console.log(p)
+                            removePreference(p)
+                        }}
                     ></FaIcon>
                 </View>)
         }
@@ -92,15 +117,23 @@ const MyProfilePage = () => {
                                 <Text className="font-bold m-1 mt-2 mb-1 text-white">Fat</Text>
                                 <DropDownPicker
                                     className='my-2'
-                                    open={openSugarDropdown}
-                                    setOpen={setOpenSugarDropdown}
+                                    open={openFatDropdown}
+                                    setOpen={setOpenFatDropdown}
                                     value={selectedPreference}
-                                    items={preferenceSettings['sugar']}
+                                    items={preferenceSettings['fat']}
                                     setItems={() => { }}
                                     setValue={setSelectedPreference}
                                     placeholder="select a preference to add"
                                     listMode="SCROLLVIEW"
                                 />
+                            </View>
+                            <View className="mt-6" >
+                                <TouchableOpacity
+                                    className="rounded-3xl justify-center bg-white mb-8"
+                                    activeOpacity={1.0}
+                                    onPress={addPreference}>
+                                    <Text className="py-4 text-center">Add preference</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -108,6 +141,10 @@ const MyProfilePage = () => {
                 <Navbar>
                 </Navbar>
             </View>
+            {errMsg ? (
+                <Modal title="Error" btnText="Done" onClick={() => setErrMsg("")} onCancel={() => setErrMsg("")}>
+                    <View className='py-8'><Text className='text-center text-xl'>{errMsg}</Text></View>
+                </Modal>) : null}
         </>
     )
 }

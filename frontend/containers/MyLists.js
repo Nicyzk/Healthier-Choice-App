@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar'
 import NavBar from '../components/NavBar';
 import Modal from '../components/Modal'
@@ -82,10 +82,10 @@ export default function MyLists() {
     <>
       <View className="p-4 flex-1 bg-white p-4" >
         <Text className="text-2xl text-center font-bold m-4 py-4 ">My Lists</Text>
-        {Object.keys(lists).length == 0 ? <Text className='text-center'>Loadings users lists...</Text>: renderLists()}
+        {Object.keys(lists).length == 0 ? <Text className='text-center'>Loadings users lists...</Text>: <ScrollView>{renderLists()}</ScrollView>}
         <View className="m-4 mx-8 py-2" >
           <TouchableOpacity
-            className="rounded-3xl justify-center bg-indigo-500 active:bg-indigo-600"
+            className="rounded-3xl justify-center bg-indigo-500 active:bg-indigo-600 mb-8"
             activeOpacity={1.0}
             onPress={() => setShowModal(true)}>
             <Text className="py-4 text-center text-white">Create New List</Text>

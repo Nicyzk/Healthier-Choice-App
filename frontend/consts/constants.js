@@ -65,17 +65,17 @@ const healthyChoicesOptions = {
 
 const preferenceSettings = {
   sugar: [
-    { label: 'No Added Sugar', value: '1' },
-    { label: 'Lower in Sugar', value: '2' },
-    { label: 'Sugar Free', value: '3' },
+    { label: 'No Added Sugar', value: 'No Added Sugar' },
+    { label: 'Lower in Sugar', value: 'Lower in Sugar' },
+    { label: 'Sugar Free', value: 'Sugar Free' },
   ],
   fat: [
-    { label: 'Lower in Saturated Fat', value: '4' },
-    { label: 'Tras Fat Free', value: '5' }
+    { label: 'Lower in Saturated Fat', value: 'Lower in Saturated Fat' },
+    { label: 'Trans Fat Free', value: 'Trans Fat Free' }
   ],
   calories: [
-    { label: 'Less than 100 calories', value: '6' },
-    { label: 'Less than 200 calories', value: '7' }
+    { label: 'Less than 100 calories', value: 'Less than 100 calories' },
+    { label: 'Less than 200 calories', value: 'Less than 200 calories' }
   ],
   sodium: [
     { label: 'Lower in Sodium', value: '8' },
