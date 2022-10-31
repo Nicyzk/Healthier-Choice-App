@@ -11,6 +11,7 @@ import { typeOptions, healthyChoicesOptions } from '../consts/constants'
 import Modal from '../components/Modal'
 import React from 'react';
 import axios from 'axios'
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 const HomePage = ({ navigation }) => {
     const [showFilter, setShowFilter] = useState(false);
@@ -24,11 +25,12 @@ const HomePage = ({ navigation }) => {
     const [addtoListProductId, setAddToListProductId] = useState(false)
     const [errMsg, setErrMsg] = useState("")
     const [lists, setLists] = useState([])
+    const focus = useIsFocused()
 
     // get users lists
     useEffect(() => {
         getLists()
-    }, [])
+    }, [focus])
 
     const getLists = async () => {
         try {
