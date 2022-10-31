@@ -2,29 +2,49 @@ import { View, Text, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOp
 import SearchBar from '../components/SearchBar'
 import NavBar from '../components/NavBar'
 import Carousel from '../components/Carousel'
-// import CarouselNew from '../components/Carousel_new'
+import CarouselNew from '../components/Carousel_new'
 import { useEffect, useState } from 'react'
 import DropdownMulti from '../components/Dropdown-multi'
 import DropdownSingle from '../components/Dropdown-single';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { typeOptions, healthyChoicesOptions } from '../consts/constants'
+import Modal from '../components/Modal'
 import React from 'react';
 import axios from 'axios'
-
-const images = { 1: require('../assets/vitagen.png'), 2: require('../assets/strawberry.png') }
 
 const HomePage = ({ navigation }) => {
     const [showFilter, setShowFilter] = useState(false);
     const [types, setTypes] = useState([])
     const [healthyChoices, setHealthyChoices] = useState({})
-    const [searchResults, setSearchResults] = useState([])
+    const [searchResults, setSearchResults] = useState(false)
     const [searchText, setSearchText] = useState("")
     const [recommendedProductDetails, setRecommendedProductDetails] = useState([])
+    const [openListDropdown, setOpenListDropdown] = useState(false)
+    const [selectedList, setSelectedList] = useState(null)
+    const [addtoListProductId, setAddToListProductId] = useState(false)
+    const [errMsg, setErrMsg] = useState("")
+    const [lists, setLists] = useState([])
 
-    // Filter Function
-    const onFilterBtnClicked = () => {
-        setShowFilter(!showFilter)
+    // get users lists
+    useEffect(() => {
+        getLists()
+    }, [])
+
+    const getLists = async () => {
+        try {
+            const results = await axios.get("https://hcs-backend.onrender.com/api/userlists/2")
+            const updatedLists = {}
+            for (let el of results.data) {
+                if (!updatedLists[el.list]) updatedLists[el.list] = []
+                if (el.productid != null) updatedLists[el.list].push(el.productid)
+            }
+            setLists(updatedLists)
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
+    // Filter Function
     const filter = async () => {
         const keywords = types
         for (let i in healthyChoices) {
@@ -125,12 +145,48 @@ const HomePage = ({ navigation }) => {
     )
 
     // Get recommended products
-    // useEffect(() => {
-    // }, [])
-    // const getRecommendedProducts = async () => {
-    //     const results = await axios.get('https://hcs-backend.onrender.com/api/search/')
-    // }
-    
+    useEffect(() => {
+        getRecommendedProducts()
+    }, [])
+    const getRecommendedProducts = async () => {
+        let results = await axios.get('https://hcs-backend.onrender.com/api/userpreference/2')
+        const preferences = []
+        for (let p of results.data) {
+            preferences.push(p.preference)
+        }
+        console.log(preferences)
+        results = await axios.get(`https://hcs-backend.onrender.com/api/search/all/${preferences.join(' ')}`)
+        setRecommendedProductDetails(results.data)
+    }
+
+    // Add Product to List
+    const listModalContent = () => {
+        const items = []
+        for (let l in lists) items.push({label: l, value: l})
+        return (
+            <View className='py-8'>
+                <Text className='my-4'>Upon confirming, the product id: {addtoListProductId} will be added to the selected list</Text>
+                <DropDownPicker
+                    open={openListDropdown}
+                    setOpen={setOpenListDropdown}
+                    value={selectedList}
+                    items={items}
+                    setItems={()=> {}}
+                    setValue={setSelectedList}
+                    placeholder="select a list"
+                />
+            </View>
+        )
+    }
+
+    const addProductToList = async () => {
+        const result = await axios.post('https://hcs-backend.onrender.com/api/userlists/createlist', {
+            "userid":2,
+            "list":selectedList,
+            "productid":addtoListProductId})
+
+        console.log(result.data)
+    }
 
     return (
         <>
@@ -138,16 +194,23 @@ const HomePage = ({ navigation }) => {
                 <Text className="text-2xl text-center font-bold m-4 py-4">Healthier Choices Near You</Text>
                 <SearchBar searchText={searchText} setSearchText={setSearchText} search={() => search(searchText)} showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
                 <ScrollView>
-                    {searchResults.length > 0 ? renderSearchResults() : null}
+                    {!searchResults ? null : (searchResults.length > 0 ? renderSearchResults() : <Text>No results found</Text>)}
                     <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Recommended</Text>
-                    <Carousel images={images} navigation={navigation}></Carousel>
-                    {/* <CarouseNew products={products} onBasketClicked={() => {}}></CarouseNew> */}
+                    <CarouselNew productDetails={recommendedProductDetails} setAddToListProductId={setAddToListProductId}></CarouselNew>
                     <View className='h-12'></View>
                 </ScrollView>
                 <NavBar></NavBar>
             </View>
             {showFilter ? renderFilter() : null}
-
+            {addtoListProductId ? (
+                <Modal title="Add to my list" btnText="Confirm" onClick={() => addProductToList()} onCancel={() => setAddToListProductId(false)} >
+                    {listModalContent()}
+                </Modal>
+            ) : null}
+            {errMsg ? (
+                <Modal title="Error" btnText="Done" onClick={() => setErrMsg("")} onCancel={() => setErrMsg("")}>
+                    <View className='py-8'><Text className='text-center text-xl'>{errMsg}</Text></View>
+                </Modal>) : null}
         </>
     )
 
