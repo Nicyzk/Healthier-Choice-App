@@ -16,9 +16,9 @@ const HomePage = ({ navigation }) => {
     const [showFilter, setShowFilter] = useState(false);
     const [types, setTypes] = useState([])
     const [healthyChoices, setHealthyChoices] = useState({})
-    const [searchResults, setSearchResults] = useState(false)
+    const [searchProductDetails, setSearchProductDetails] = useState(null)
     const [searchText, setSearchText] = useState("")
-    const [recommendedProductDetails, setRecommendedProductDetails] = useState([])
+    const [recommendedProductDetails, setRecommendedProductDetails] = useState(null)
     const [openListDropdown, setOpenListDropdown] = useState(false)
     const [selectedList, setSelectedList] = useState(null)
     const [addtoListProductId, setAddToListProductId] = useState(false)
@@ -42,16 +42,6 @@ const HomePage = ({ navigation }) => {
         } catch (err) {
             console.log(err.message)
         }
-    }
-
-    // Filter Function
-    const filter = async () => {
-        const keywords = types
-        for (let i in healthyChoices) {
-            keywords.push(healthyChoices[i])
-        }
-        console.log(keywords)
-        // await search(keywords) // updates searchResult
     }
 
     const renderFilter = () => {
@@ -100,7 +90,7 @@ const HomePage = ({ navigation }) => {
                                 className="rounded-3xl justify-center bg-indigo-500 active:bg-indigo-600"
                                 activeOpacity={1.0}
                                 onPress={() => {
-                                    filter()
+                                    search()
                                     setShowFilter(false)
                                 }}>
                                 <Text className="py-4 text-center text-lg text-white">Done</Text>
@@ -114,33 +104,46 @@ const HomePage = ({ navigation }) => {
     }
 
     // Search Function
-    const search = async (kw) => {
+    const search = async () => {
+        //? disable types because causing errors
+        const keywords = []
+        for (let i in healthyChoices) {
+            keywords.push(healthyChoices[i])
+        }
+        let toSearch = ''
+        if (!searchText && keywords.length == 0) toSearch = '*'
+        // if no search Text & no keywords, searchText is '*'. If got searchText & no keywords - okay
+        // if no searchText but got keywords, search only by keywords. if got both, search by both. 
+
         try {
-            const keywords = kw.split(' ')
-            console.log(keywords)
-            // TO EDIT
-            // const results = await axios.post("https://hcs-backend.onrender.com/api/search/all", { keywords })
-            const updatedResults = []
-            updatedResults.push({
-                "productid": 5,
-                "productname": "Afiat Premium Corn Oil 2L",
-                "productdescription": "tester description 5",
-                "subcategory": "Lower in Saturated Fat",
-                "location": "NTUC",
-                "imgFile": "vitagen.png"
-            }) // Testing Only!!
-            setSearchResults(updatedResults)
+            const data = {}
+            let results = {data: []}
+            if (searchText) results = await axios.get(`https://hcs-backend.onrender.com/api/search/all/${searchText}`)
+            for (let e of results.data) data[e.productid] = e
+
+            for (let i=0; i<keywords.length; i++) {
+                results = await axios.get(`https://hcs-backend.onrender.com/api/search/subcategory/${keywords[i]}`)
+                for (let e of results.data) data[e.productid] = e
+            }
+            console.log(data)
+            const details = []
+            for (let key in data) {
+                details.push(data[key])
+            }
+            console.log(details)
+
+            setSearchProductDetails(details)
         } catch (err) {
             console.log(err.message)
         }
     }
 
-    useEffect(() => { if (searchResults.length > 0) renderSearchResults(); }, [searchResults])
+    useEffect(() => { if (searchProductDetails) renderSearchResults(); }, [searchProductDetails])
 
     const renderSearchResults = () => (
         <>
             <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Search Results</Text>
-            <Carousel images={images} navigation={navigation}></Carousel>
+            <CarouselNew productDetails={searchProductDetails} setAddToListProductId={setAddToListProductId}></CarouselNew>
         </>
     )
 
@@ -148,6 +151,7 @@ const HomePage = ({ navigation }) => {
     useEffect(() => {
         getRecommendedProducts()
     }, [])
+
     const getRecommendedProducts = async () => {
         let results = await axios.get('https://hcs-backend.onrender.com/api/userpreference/2')
         const preferences = []
@@ -179,11 +183,13 @@ const HomePage = ({ navigation }) => {
         )
     }
 
+    //? Wait for list name already exists error to be solved
     const addProductToList = async () => {
-        const result = await axios.post('https://hcs-backend.onrender.com/api/userlists/createlist', {
+        const result = await axios.post('https://hcs-backend.onrender.com/api/userlists/', {
             "userid":2,
             "list":selectedList,
-            "productid":addtoListProductId})
+            "productid":addtoListProductId
+        })
 
         console.log(result.data)
     }
@@ -192,18 +198,21 @@ const HomePage = ({ navigation }) => {
         <>
             <View className="p-4 flex-1 bg-white" >
                 <Text className="text-2xl text-center font-bold m-4 py-4">Healthier Choices Near You</Text>
-                <SearchBar searchText={searchText} setSearchText={setSearchText} search={() => search(searchText)} showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
+                <SearchBar searchText={searchText} setSearchText={setSearchText} search={search} showFilter={showFilter} setShowFilter={setShowFilter}></SearchBar>
                 <ScrollView>
-                    {!searchResults ? null : (searchResults.length > 0 ? renderSearchResults() : <Text>No results found</Text>)}
+                    {!searchProductDetails ? null : (searchProductDetails.length > 0 ? (renderSearchResults()) : <Text>No results found</Text>)}
                     <Text className="p-1 m-4 w-28 border-b-4 border-transparent border-b-indigo-500/75 text-center">Recommended</Text>
-                    <CarouselNew productDetails={recommendedProductDetails} setAddToListProductId={setAddToListProductId}></CarouselNew>
+                    {!recommendedProductDetails ? <Text>Loading recommended products...</Text>: (recommendedProductDetails.length == 0 ? <Text>No recommendations found</Text>: <CarouselNew productDetails={recommendedProductDetails} setAddToListProductId={setAddToListProductId}></CarouselNew>)}
                     <View className='h-12'></View>
                 </ScrollView>
                 <NavBar></NavBar>
             </View>
             {showFilter ? renderFilter() : null}
             {addtoListProductId ? (
-                <Modal title="Add to my list" btnText="Confirm" onClick={() => addProductToList()} onCancel={() => setAddToListProductId(false)} >
+                <Modal title="Add to my list" btnText="Confirm" onClick={() => {
+                    addProductToList()
+                    setAddToListProductId(false)
+                }} onCancel={() => setAddToListProductId(false)} >
                     {listModalContent()}
                 </Modal>
             ) : null}
