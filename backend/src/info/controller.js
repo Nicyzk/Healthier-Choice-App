@@ -163,7 +163,7 @@ const createList = (req, res) => {
   const { userid, list, productid } = req.body;
 
   // check if list exists already
-  pool.query(queries.checkOnlyListExists, [userid, list], (error, results) => {
+  pool.query(queries.checkOnlyListExists, [userid, list, productid], (error, results) => {
     if (results.rows.length) {
       res.send("List name already being used!");
     } else {

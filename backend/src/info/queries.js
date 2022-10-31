@@ -26,7 +26,7 @@ const addUserlist =
 const removeProduct =
   "DELETE FROM userlists WHERE userid = $1 AND list = $2 AND productid = $3";
 const checkOnlyListExists =
-  "SELECT userid, list  FROM userlists WHERE userid =$1 AND list = $2";
+  "SELECT userid, list, productid  FROM userlists WHERE userid =$1 AND list = $2 AND productid = $3";
 const removeList = "DELETE FROM userlists WHERE userid = $1 AND list = $2";
 
 // For products table
