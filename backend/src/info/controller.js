@@ -4,7 +4,7 @@ const queries = require("./queries");
 //For username table
 const getUsers = (req, res) => {
   pool.query(queries.getUsers, (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -12,7 +12,7 @@ const getUsers = (req, res) => {
 const getUsersbyId = (req, res) => {
   const userid = parseInt(req.params.userid);
   pool.query(queries.getUsersbyId, [userid], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -28,7 +28,7 @@ const addUser = (req, res) => {
 
     // add user to db
     pool.query(queries.addUser, [userid, username], (error, results) => {
-      if (error) throw error;
+      if (error) return res.status(500).send(error.message);
       res.status(201).send("User created successfully");
     });
   });
@@ -44,7 +44,7 @@ const removeUser = (req, res) => {
     }
 
     pool.query(queries.removeUser, [userid], (error, results) => {
-      if (error) throw error;
+      if (error) return res.status(500).send(error.message);
       res.status(200).send("User removed successfully!");
     });
   });
@@ -60,7 +60,7 @@ const updateUser = (req, res) => {
     }
 
     pool.query(queries.updateUser, [username, userid], (error, results) => {
-      if (error) throw error;
+      if (error) return res.status(500).send(error.message);
       res.status(200).send("Username updated successfully");
     });
   });
@@ -71,7 +71,7 @@ const updateUser = (req, res) => {
 const getPreferencebyId = (req, res) => {
   const userid = parseInt(req.params.userid);
   pool.query(queries.getPreferencebyId, [userid], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -92,7 +92,7 @@ const addPreference = (req, res) => {
           queries.addPreference,
           [userid, preference],
           (error, results) => {
-            if (error) throw error;
+            if (error) return res.status(500).send(error.message);
             res.status(201).send("Preference added successfully!");
           }
         );
@@ -116,7 +116,7 @@ const removePreference = (req, res) => {
         queries.removePreference,
         [userid, preference],
         (error, results) => {
-          if (error) throw error;
+          if (error) return res.status(500).send(error.message);
           res.status(200).send("Preference removed successfully!");
         }
       );
@@ -128,7 +128,7 @@ const removePreference = (req, res) => {
 const getUserlistsbyId = (req, res) => {
   const userid = parseInt(req.params.userid);
   pool.query(queries.getUserlistsbyId, [userid], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -149,7 +149,7 @@ const addUserlist = (req, res) => {
           queries.addUserlist,
           [userid, list, productid],
           (error, results) => {
-            if (error) throw error;
+            if (error) return res.status(500).send(error.message);
             res.status(201).send("Item added successfully!");
           }
         );
@@ -163,21 +163,25 @@ const createList = (req, res) => {
   const { userid, list, productid } = req.body;
 
   // check if list exists already
-  pool.query(queries.checkOnlyListExists, [userid, list, productid], (error, results) => {
-    if (results.rows.length) {
-      res.send("List name already being used!");
-    } else {
-      // add list to userlists table
-      pool.query(
-        queries.addUserlist,
-        [userid, list, productid],
-        (error, results) => {
-          if (error) throw error;
-          res.status(201).send("Item added successfully!");
-        }
-      );
+  pool.query(
+    queries.checkOnlyListExists,
+    [userid, list],
+    (error, results) => {
+      if (results.rows.length) {
+        res.send("List name already being used!");
+      } else {
+        // add list to userlists table
+        pool.query(
+          queries.addUserlist,
+          [userid, list, productid],
+          (error, results) => {
+            if (error) return res.status(500).send(error.message);
+            res.status(201).send("List added successfully!");
+          }
+        );
+      }
     }
-  });
+  );
 };
 
 const removeProduct = (req, res) => {
@@ -195,7 +199,7 @@ const removeProduct = (req, res) => {
         queries.removeProduct,
         [userid, list, productid],
         (error, results) => {
-          if (error) throw error;
+          if (error) return res.status(500).send(error.message);
           res.status(200).send("Product removed successfully!");
         }
       );
@@ -212,7 +216,7 @@ const removeList = (req, res) => {
     }
 
     pool.query(queries.removeList, [userid, list], (error, results) => {
-      if (error) throw error;
+      if (error) return res.status(500).send(error.message);
       res.status(200).send("List removed successfully!");
     });
   });
@@ -222,7 +226,7 @@ const removeList = (req, res) => {
 
 const getProducts = (req, res) => {
   pool.query(queries.getProducts, (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -230,7 +234,7 @@ const getProducts = (req, res) => {
 const getProductsbyId = (req, res) => {
   const productid = parseInt(req.params.productid);
   pool.query(queries.getProductsbyId, [productid], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -238,7 +242,7 @@ const getProductsbyId = (req, res) => {
 const getProductsbyBrand = (req, res) => {
   const brand = req.params.brand;
   pool.query(queries.getProductsbyBrand, [brand], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -249,7 +253,7 @@ const getProductsbySubcategory = (req, res) => {
     queries.getProductsbySubcategory,
     [subcategory],
     (error, results) => {
-      if (error) throw error;
+      if (error) return res.status(500).send(error.message);
       res.status(200).json(results.rows);
     }
   );
@@ -264,11 +268,11 @@ const getProductsbyAll = (req, res) => {
       str = "SELECT * FROM products OR ";
       break;
     }
-    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `
+    str += `UPPER(productname) LIKE UPPER(('%${kw}%')) OR UPPER(productdescription) LIKE UPPER(('%${kw}%')) OR UPPER(subcategory) LIKE UPPER(('%${kw}%')) OR UPPER(location) LIKE UPPER(('%${kw}%')) OR `;
   }
-  str = str.slice(0,-4)
+  str = str.slice(0, -4);
   pool.query(str, (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -277,7 +281,7 @@ const getProductsbyAll = (req, res) => {
 
 const getInfo = (req, res) => {
   pool.query(queries.getInfo, (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -285,7 +289,7 @@ const getInfo = (req, res) => {
 const getInfobyCategory = (req, res) => {
   const category = req.params.category;
   pool.query(queries.getInfobyCategory, [category], (error, results) => {
-    if (error) throw error;
+    if (error) return res.status(500).send(error.message);
     res.status(200).json(results.rows);
   });
 };
@@ -303,7 +307,7 @@ const addInfo = (req, res) => {
       queries.addInfo,
       [hcs_subcat, hcs_cat, hcs_subcat_des],
       (error, results) => {
-        if (error) throw error;
+        if (error) return res.status(500).send(error.message);
         res.status(201).send("User created successfully");
       }
     );

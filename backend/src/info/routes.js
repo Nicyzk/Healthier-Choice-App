@@ -24,7 +24,7 @@ router.delete("/userlists/removeproduct", controller.removeProduct);
 router.delete("/userlists/removelist", controller.removeList);
 
 // For products table in DB
-// 
+
 router.get("/search", controller.getProducts);
 router.get("/search/product/:productid", controller.getProductsbyId);
 router.get("/search/brand/:brand", controller.getProductsbyBrand);
@@ -39,5 +39,9 @@ router.get("/search/all/:searchstring", controller.getProductsbyAll)
 router.get("/info/category", controller.getInfo);
 router.get("/info/category/:category", controller.getInfobyCategory);
 router.post("/info/category", controller.addInfo);
+
+// API call for future use
+
+
 
 module.exports = router;
