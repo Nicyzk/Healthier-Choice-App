@@ -4,19 +4,20 @@ import SearchBar from '../components/SearchBar'
 import NavBar2 from '../components/NavBar2';
 import Modal from '../components/Modal'
 import axios from 'axios'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 export default function MyLists() {
   const [lists, setLists] = useState({})  // { shoppinglist1: [1,13,...] }
   const [showModal, setShowModal] = useState(false)
   const [newListName, setNewListName] = useState("")
   const [errMsg, setErrMsg] = useState("")
+  const focus = useIsFocused()
 
   const navigation = useNavigation()
 
   useEffect(() => {
     getLists()
-  }, [showModal])
+  }, [showModal, focus])
 
   const getLists = async () => {
     try {
