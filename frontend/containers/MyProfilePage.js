@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAreaView, ScrollView, StatusBar, TextInput } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import UploadImage from '../components/UploadImage';
-import Navbar from '../components/NavBar';
+import Navbar3 from '../components/NavBar3';
 import axios from 'axios'
 import FaIcon from 'react-native-vector-icons/FontAwesome'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -72,8 +72,7 @@ const MyProfilePage = () => {
         const toRender = []
         for (let p of userPreferences) {
             toRender.push(
-                <View key={p} className='bg-white m-2 h-8 flex-1 flex-row justify-evenly items-center'>
-                    <Text className=''>{p}</Text>
+                <View key={p} className='bg-white px-2 m-2 h-8 flex-1 flex-row items-center'>
                     <FaIcon
                         name="remove"
                         color="red"
@@ -83,6 +82,8 @@ const MyProfilePage = () => {
                             removePreference(p)
                         }}
                     ></FaIcon>
+                    <Text className='ml-4'>{p}</Text>
+                    
                 </View>)
         }
         return toRender
@@ -91,7 +92,7 @@ const MyProfilePage = () => {
 
     return (
         <>
-            <View className="p-4 flex-4 bg-white" >
+            <View className="p-4 flex-1 bg-white" >
                 <Text className="text-2xl text-center font-bold m-1 mt-8 mb-5 ">My Profile Page</Text>
                 <ScrollView className='h-4/5 mb-12'>
                     <View className='flex-1 items-center'>
@@ -107,7 +108,7 @@ const MyProfilePage = () => {
                         <View className='bg-indigo-500 rounded-xl p-4 w-4/5'>
                             <Text className="text-xl text-center font-bold m-1 mt-2 mb-5 text-white">Manage Preferences</Text>
                             <View style={{ zIndex: 10 }}>
-                                <Text className="font-bold m-1 mt-2 mb-1 text-white">Sugar</Text>
+                                <Text className="font-bold m-1 mt-2 mb-2 text-white">Sugar</Text>
                                 <DropDownPicker
                                     style={{ zIndex: 10 }}
                                     className='my-2'
@@ -153,7 +154,7 @@ const MyProfilePage = () => {
                             </View>
                             <View className="mt-6" >
                                 <TouchableOpacity
-                                    className="rounded-3xl justify-center bg-white mb-8"
+                                    className="rounded-3xl justify-center bg-white mb-2 "
                                     activeOpacity={1.0}
                                     onPress={addPreference}>
                                     <Text className="py-4 text-center">Add preference</Text>
@@ -162,8 +163,8 @@ const MyProfilePage = () => {
                         </View>
                     </View>
                 </ScrollView>
-                <Navbar>
-                </Navbar>
+                <Navbar3>
+                </Navbar3>
             </View>
             {loading ? <View className='bg-slate-100 h-full w-full absoluteflex-1 justify-center items-center'><Text>Loading...please wait</Text></View>: null}
             {msg ? (

@@ -3,7 +3,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar1 = () => {
     const navigation = useNavigation();
     const [actionTriggered, setActionTriggered] = useState('');
     return (
@@ -15,7 +15,7 @@ const Navbar = () => {
                 <View className="ml-12">
                     <FaIcon
                         name="home"
-                        color="#463EC680"
+                        color="#6c6e71"
                         size={30}
                     ></FaIcon>
                 </View>
@@ -27,7 +27,7 @@ const Navbar = () => {
                 <View className="px-0 ml-2">
                     <FaIcon
                         name="info"
-                        color="#6c6e71"
+                        color="#463EC680"
                         size={30}
                     ></FaIcon>
                 </View>
@@ -54,4 +54,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar1

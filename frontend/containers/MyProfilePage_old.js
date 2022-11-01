@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAre
 import React, { useState } from 'react';
 import SelectList from 'react-native-dropdown-select-list';
 import UploadImage from '../components/UploadImage';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/NavBar3';
 
 import { MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -462,7 +462,7 @@ const MyProfilePage = ({ navigation }) => {
 
                 </ScrollView>
             </View>
-            <Navbar></Navbar>
+            <Navbar3></Navbar3>
         </View>
     )
 }

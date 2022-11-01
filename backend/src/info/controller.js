@@ -165,7 +165,7 @@ const createList = (req, res) => {
   // check if list exists already
   pool.query(
     queries.checkOnlyListExists,
-    [userid, list, productid],
+    [userid, list],
     (error, results) => {
       if (results.rows.length) {
         res.send("List name already being used!");
@@ -176,7 +176,7 @@ const createList = (req, res) => {
           [userid, list, productid],
           (error, results) => {
             if (error) return res.status(500).send(error.message);
-            res.status(201).send("Item added successfully!");
+            res.status(201).send("List added successfully!");
           }
         );
       }

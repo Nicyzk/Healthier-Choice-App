@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import NavBar2 from '../components/NavBar2';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity, Linking } from 'react-native';
@@ -105,6 +106,7 @@ export default function App() {
         </MapView>
       ) : <View className="h-70 w-70"><Text>Loading map...</Text></View>}
       {ready ? <ScrollView className='h-2/3'>{renderListOfPlaces()}</ScrollView> : <View className="h-70 w-70"><Text>Loading nearby locations...</Text></View>}
+      <NavBar2></NavBar2>
     </View>
   );
 }
