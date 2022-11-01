@@ -3,7 +3,7 @@ import FaIcon from 'react-native-vector-icons/FontAwesome'
 import { Image, View, Text } from 'react-native'
 
 
-const Product = ({name, hcs, onBasketClicked, onMapClicked, imgSource}) => {
+const Product = ({ name, hcs, onBasketClicked, onMapClicked, imgSource, canDelete, deleteProduct }) => {
     return (
         <View className='mx-2 my-6 py-2 h-56 w-48 rounded-3xl' style={{ backgroundColor: '#463EC633' }}>
             <View className='bottom-10 items-center'>
@@ -23,6 +23,14 @@ const Product = ({name, hcs, onBasketClicked, onMapClicked, imgSource}) => {
                         size={20}
                         onPress={onMapClicked}
                     ></FaIcon>
+                    {canDelete ? (
+                        <FaIcon
+                            name="close"
+                            color="red"
+                            size={20}
+                            onPress={deleteProduct}
+                        ></FaIcon>
+                    ) : null}
                 </View>
             </View>
         </View>

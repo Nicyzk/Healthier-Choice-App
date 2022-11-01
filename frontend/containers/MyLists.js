@@ -4,19 +4,20 @@ import SearchBar from '../components/SearchBar'
 import NavBar2 from '../components/NavBar2';
 import Modal from '../components/Modal'
 import axios from 'axios'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 export default function MyLists() {
   const [lists, setLists] = useState({})  // { shoppinglist1: [1,13,...] }
   const [showModal, setShowModal] = useState(false)
   const [newListName, setNewListName] = useState("")
   const [errMsg, setErrMsg] = useState("")
+  const focus = useIsFocused()
 
   const navigation = useNavigation()
 
   useEffect(() => {
     getLists()
-  }, [showModal])
+  }, [showModal, focus])
 
   const getLists = async () => {
     try {
@@ -36,7 +37,7 @@ export default function MyLists() {
     const rendered = []
     for (let list in lists) {
       rendered.push(
-        <TouchableOpacity key={list} onPress={() => navigation.navigate('ListPage',  {listName: list, products: lists[list]})}>
+        <TouchableOpacity key={list} onPress={() => navigation.navigate('ListPage',  {listName: list, products: lists[list], lists: lists})}>
           <View className="p-4 m-4 rounded-lg text-xl items-center justify-center" style={{ backgroundColor: '#463EC633' }}>
             <Text>{list}</Text>
           </View>

@@ -36,28 +36,35 @@ const typeOptions = [
 const healthyChoicesOptions = {
   'Sugar': [
     { label: 'no filter', value: '' },
-    { label: 'Low in sugar', value: 'low in sugar' },
-    { label: 'Medium in sugar', value: 'medium in sugar' },
-    { label: 'High in sugar', value: 'high in sugar' }
+    { label: 'Sugar Free', value: 'Sugar Free' },
+    { label: 'No Added Sugar', value: 'No Added Sugar' },
+    { label: 'Lower in Sugar', value: 'Lower in Sugar' },
+    { label: 'Low Glycemic Index', value: 'Low Glycemic Index' }
   ],
   'Fat': [
     { label: 'no filter', value: '' },
-    { label: 'Low in fat', value: 'low in fat' },
-    { label: 'Medium in fat', value: 'medium in fat' },
-    { label: 'High in fat', value: 'high in fat' }
+    { label: 'Lower in Saturated Fat', value: 'Lower in Saturated Fat' },
+    { label: 'Trans Fat Free', value: 'Trans Fat Free' }
   ],
   'Sodium': [
     { label: 'no filter', value: '' },
-    { label: 'Low in sodium', value: 'low in sodium' },
-    { label: 'Medium in sodium', value: 'medium in sodium' },
-    { label: 'High in sodium', value: 'high in sodium' }
+    { label: 'Lower in Sodium', value: 'Lower in Sodium' },
+    { label: 'No Added Sodium', value: 'No Added Sodium' }
   ],
   'Calories': [
     { label: 'no filter', value: '' },
-    { label: 'Low in calories', value: 'low in calories' },
-    { label: 'Medium in calories', value: 'medium in calories' },
-    { label: 'High in calories', value: 'high in calories' }
+    { label: 'Less than 100 calories', value: 'Less than 100 calories' },
+    { label: 'Less than 200 calories', value: 'Less than 200 calories' }
   ],
+  'Wholegrains': [
+    { label: 'Higher in Wholegrains', value: 'Higher in Wholegrains' }
+  ],
+  'Calcium': [
+    { label: 'Higher in Calcium', value: 'Higher in Calcium' }
+  ],
+  'Fruits and Vegetables': [
+    { label: 'Eat 2+2 Servings of Fruits and Vegetables Daily', value: 'Eat 2+2 Servings of Fruits and Vegetables Daily' }
+  ]
 }
 
 
@@ -68,6 +75,7 @@ const preferenceSettings = {
     { label: 'No Added Sugar', value: 'No Added Sugar' },
     { label: 'Lower in Sugar', value: 'Lower in Sugar' },
     { label: 'Sugar Free', value: 'Sugar Free' },
+    { label: 'Low Glycemic Index', value: 'Low Glycemic Index' }
   ],
   fat: [
     { label: 'Lower in Saturated Fat', value: 'Lower in Saturated Fat' },
@@ -78,20 +86,20 @@ const preferenceSettings = {
     { label: 'Less than 200 calories', value: 'Less than 200 calories' }
   ],
   sodium: [
-    { label: 'Lower in Sodium', value: '8' },
-    { label: 'No Added Sodium', value: '9' }]
+    { label: 'Lower in Sodium', value: 'Lower in Sodium' },
+    { label: 'No Added Sodium', value: 'No Added Sodium' }]
   ,
   calcium: [
-    { label: 'Higher in Calcium', value: '10' }
+    { label: 'Higher in Calcium', value: 'Higher in Calcium' }
   ], 
   wholegrains: [
-    { label: 'Higher in Wholegrains', value: '11' }
+    { label: 'Higher in Wholegrains', value: 'Higher in Wholegrains' }
   ],
   bloodsugar: [
-    { label: 'Low Glycemic Index', value: '12' }
+    { label: 'Low Glycemic Index', value: 'Low Glycemic Index' }
   ],
   fruitsveges: [
-    { label: 'Eat 2+2 Servings of Fruits and Vegetables Daily', value: '13' }
+    { label: 'Eat 2+2 Servings of Fruits and Vegetables Daily', value: 'Eat 2+2 Servings of Fruits and Vegetables Daily' }
   ]
 }
 

@@ -212,7 +212,10 @@ const removeList = (req, res) => {
 
   pool.query(queries.checkOnlyListExists, [userid, list], (error, results) => {
     if (!results.rows.length) {
-      res.send("Cannot remove list which has not been added yet!");
+      // res.send("Cannot remove list which has not been added yet!");
+      // if (error) return res.status(500).send(error.message);
+      res.status(500).send("Cannot remove list which has not been added yet!")
+      return;
     }
 
     pool.query(queries.removeList, [userid, list], (error, results) => {
@@ -342,3 +345,5 @@ module.exports = {
   getInfobyCategory,
   addInfo,
 };
+
+
