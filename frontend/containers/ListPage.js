@@ -7,18 +7,24 @@ import images from '../consts/images'
 import React from 'react';
 import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const ListPage = ({ route }) => {
-    const { listName, products } = route.params
+    const { listName, products, lists } = route.params
     const [productDetails, setProductDetails] = useState(false)
     const [msg, setMsg] = useState("")
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [errMsg, setErrMsg] = useState("")
     const navigation = useNavigation()
+    const [addtoListProductId, setAddToListProductId] = useState(false)
+    const [openListDropdown, setOpenListDropdown] = useState(false)
+    const [productToDelete, setProductToDelete] = useState(null)
+    const [selectedList, setSelectedList] = useState(null)
+    const focus = useIsFocused()
 
     useEffect(() => {
         getProductDetails()
-    }, [])
+    }, [focus, msg])
 
     const getProductDetails = async () => {
         const details = []
@@ -39,16 +45,28 @@ const ListPage = ({ route }) => {
         const products = []
         for (let p of productDetails) {
             products.push(
-                <Product key={p.productid} name={p.productname} hcs={p.subcategory} onBasketClicked={() => { }} onMapClicked={() => { }} imgSource={images[p.productid]}></Product>
+                <Product deleteProduct={() => deleteProduct(p.productid)} canDelete={true} key={p.productid} name={p.productname} hcs={p.subcategory} onBasketClicked={() => setAddToListProductId(p.productid)} onMapClicked={() => { }} imgSource={images[p.productid]}></Product>
             )
         }
         return products
     }
 
+    const deleteProduct = async (id) => {
+        try {
+            console.log(listName)
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removeproduct', { data: { userid: 2, list: listName, productid: id } })
+            if (typeof results.data == 'string') setMsg(results.data)
+            setMsg("Product has been deleted from list!")
+        } catch (err) {
+            console.log(err)
+            setErrMsg(err.message)
+        }
+    }
+
     const removeList = async () => {
         try {
             console.log(listName)
-            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removelist', { data: { userid: 2, list: listName }})
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removelist', { data: { userid: 2, list: listName } })
             console.log(results.data)
             if (typeof results.data == 'string') setMsg(results.data)
             console.log('hi')
@@ -60,6 +78,42 @@ const ListPage = ({ route }) => {
             setErrMsg(err.message)
         }
     }
+
+    const addProductToList = async () => {
+        try {
+            const result = await axios.post('https://hcs-backend.onrender.com/api/userlists/', {
+                "userid": 2,
+                "list": selectedList,
+                "productid": addtoListProductId
+            })
+            setMsg("Item has been added successfully!")
+        } catch (err) {
+            console.log(err.message)
+            setErrMsg(err.message)
+        }
+
+    }
+
+    // Add Product to List
+    const listModalContent = () => {
+        const items = []
+        for (let l in lists) items.push({ label: l, value: l })
+        return (
+            <View className='py-8'>
+                <Text className='my-4'>Upon confirming, the product id: {addtoListProductId} will be added to the selected list</Text>
+                <DropDownPicker
+                    open={openListDropdown}
+                    setOpen={setOpenListDropdown}
+                    value={selectedList}
+                    items={items}
+                    setItems={() => { }}
+                    setValue={setSelectedList}
+                    placeholder="select a list"
+                />
+            </View>
+        )
+    }
+
 
     return (
         <>
@@ -87,10 +141,22 @@ const ListPage = ({ route }) => {
                 <Modal title="Delete List" btnText="Confirm" onClick={() => removeList()} onCancel={() => setShowDeleteModal(false)}>
                     <View className='py-8'><Text className='text-center text-xl'>Are you sure you want to delete this list?</Text></View>
                 </Modal>) : null}
+            {showDeleteProductModal ? (
+                <Modal title="Delete List" btnText="Confirm" onClick={() => deleteProduct()} onCancel={() => setShowDeleteProductModal(false)}>
+                    <View className='py-8'><Text className='text-center text-xl'>Are you sure you want to delete this product?</Text></View>
+                </Modal>) : null}
             {errMsg ? (
                 <Modal title="Error" btnText="Done" onClick={() => setErrMsg("")} onCancel={() => setErrMsg("")}>
                     <View className='py-8'><Text className='text-center text-xl'>{errMsg}</Text></View>
                 </Modal>) : null}
+            {addtoListProductId ? (
+                <Modal title="Add to my list" btnText="Confirm" onClick={() => {
+                    addProductToList()
+                    setAddToListProductId(false)
+                }} onCancel={() => setAddToListProductId(false)} >
+                    {listModalContent()}
+                </Modal>
+            ) : null}
         </>
     )
 }

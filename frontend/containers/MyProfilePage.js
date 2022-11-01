@@ -14,6 +14,7 @@ const MyProfilePage = () => {
     const [selectedPreference, setSelectedPreference] = useState(null)
     const [openSugarDropdown, setOpenSugarDropdown] = useState(false)
     const [openFatDropdown, setOpenFatDropdown] = useState(false)
+    const [openSodiumDropdown, setOpenSodiumDropdown] = useState(false)
     const [loading, setLoading] = useState(false)
     const [msg, setMsg] = useState("")
     const [errMsg, setErrMsg] = useState("")
@@ -59,7 +60,6 @@ const MyProfilePage = () => {
             const results = await axios.delete('https://hcs-backend.onrender.com/api/userpreference/2', { data: { userid: 2, preference: p }})
             console.log(results.data)
             if (typeof results.data == 'string') setMsg(results.data)
-            console.log('hi')
             setLoading(false)
         } catch (err) {
             console.log(err)
@@ -72,7 +72,7 @@ const MyProfilePage = () => {
         const toRender = []
         for (let p of userPreferences) {
             toRender.push(
-                <View className='bg-white m-2 h-8 flex-1 flex-row justify-evenly items-center'>
+                <View key={p} className='bg-white m-2 h-8 flex-1 flex-row justify-evenly items-center'>
                     <Text className=''>{p}</Text>
                     <FaIcon
                         name="remove"
@@ -106,9 +106,10 @@ const MyProfilePage = () => {
                     <View className='flex-1 items-center my-4'>
                         <View className='bg-indigo-500 rounded-xl p-4 w-4/5'>
                             <Text className="text-xl text-center font-bold m-1 mt-2 mb-5 text-white">Manage Preferences</Text>
-                            <View>
+                            <View style={{ zIndex: 10 }}>
                                 <Text className="font-bold m-1 mt-2 mb-1 text-white">Sugar</Text>
                                 <DropDownPicker
+                                    style={{ zIndex: 10 }}
                                     className='my-2'
                                     open={openSugarDropdown}
                                     setOpen={setOpenSugarDropdown}
@@ -120,14 +121,30 @@ const MyProfilePage = () => {
                                     listMode="SCROLLVIEW"
                                 />
                             </View>
-                            <View>
+                            <View style={{ zIndex: 9 }}>
                                 <Text className="font-bold m-1 mt-2 mb-1 text-white">Fat</Text>
                                 <DropDownPicker
+                                    style={{ zIndex: 9}}
                                     className='my-2'
                                     open={openFatDropdown}
                                     setOpen={setOpenFatDropdown}
                                     value={selectedPreference}
                                     items={preferenceSettings['fat']}
+                                    setItems={() => { }}
+                                    setValue={setSelectedPreference}
+                                    placeholder="select a preference to add"
+                                    listMode="SCROLLVIEW"
+                                />
+                            </View>
+                            <View style={{ zIndex: 8 }}>
+                                <Text className="font-bold m-1 mt-2 mb-1 text-white">Sodium</Text>
+                                <DropDownPicker
+                                    style={{ zIndex: 8 }}
+                                    className='my-2'
+                                    open={openSodiumDropdown}
+                                    setOpen={setOpenSodiumDropdown}
+                                    value={selectedPreference}
+                                    items={preferenceSettings['sodium']}
                                     setItems={() => { }}
                                     setValue={setSelectedPreference}
                                     placeholder="select a preference to add"
@@ -148,6 +165,7 @@ const MyProfilePage = () => {
                 <Navbar>
                 </Navbar>
             </View>
+            {loading ? <View className='bg-slate-100 h-full w-full absoluteflex-1 justify-center items-center'><Text>Loading...please wait</Text></View>: null}
             {msg ? (
                 <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>
                     <View className='py-8'><Text className='text-center text-xl'>{msg}</Text></View>

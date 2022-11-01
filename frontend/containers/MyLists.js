@@ -36,7 +36,7 @@ export default function MyLists() {
     const rendered = []
     for (let list in lists) {
       rendered.push(
-        <TouchableOpacity key={list} onPress={() => navigation.navigate('ListPage',  {listName: list, products: lists[list]})}>
+        <TouchableOpacity key={list} onPress={() => navigation.navigate('ListPage',  {listName: list, products: lists[list], lists: lists})}>
           <View className="p-4 m-4 rounded-lg text-xl items-center justify-center" style={{ backgroundColor: '#463EC633' }}>
             <Text>{list}</Text>
           </View>

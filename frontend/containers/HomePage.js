@@ -200,7 +200,7 @@ const HomePage = ({ navigation }) => {
     // Get recommended products
     useEffect(() => {
         getRecommendedProducts()
-    }, [])
+    }, [focus])
 
     const getRecommendedProducts = async () => {
         let results = await axios.get('https://hcs-backend.onrender.com/api/userpreference/2')
