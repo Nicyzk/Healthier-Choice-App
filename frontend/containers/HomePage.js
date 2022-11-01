@@ -29,6 +29,7 @@ const HomePage = ({ navigation }) => {
 
     // get users lists
     useEffect(() => {
+        getRecommendedProducts()
         getLists()
     }, [focus])
 
@@ -213,7 +214,7 @@ const HomePage = ({ navigation }) => {
         for (let i=0; i<preferences.length; i++) {
             results = await axios.get(`https://hcs-backend.onrender.com/api/search/subcategory/${preferences[i]}`)
             for (let j in results.data) {
-                temp.push(j)
+                temp.push(results.data[j])
             }
         }
         console.log(temp)
