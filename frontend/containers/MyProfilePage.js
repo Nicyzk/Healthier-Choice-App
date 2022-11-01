@@ -15,6 +15,7 @@ const MyProfilePage = () => {
     const [openSugarDropdown, setOpenSugarDropdown] = useState(false)
     const [openFatDropdown, setOpenFatDropdown] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [msg, setMsg] = useState("")
     const [errMsg, setErrMsg] = useState("")
 
     useEffect(() => {
@@ -42,9 +43,10 @@ const MyProfilePage = () => {
         try {
             setLoading(true)
             const results = await axios.post('https://hcs-backend.onrender.com/api/userpreference', { userid: 2, preference: selectedPreference })
-            if (typeof results.data == 'string') throw new Error(results.data)
+            if (typeof results.data == 'string') setMsg(results.data)
             setLoading(false)
         } catch (err) {
+            setLoading(false)
             setErrMsg(err.message)
         }
         
@@ -53,10 +55,15 @@ const MyProfilePage = () => {
     const removePreference = async(p) => {
         try {
             setLoading(true)
-            const results = await axios.delete('https://hcs-backend.onrender.com/api/userpreference/2', { userid: 2, preference: p })
-            if (typeof results.data == 'string') throw new Error(results.data)
+            console.log(p)
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userpreference/2', { data: { userid: 2, preference: p }})
+            console.log(results.data)
+            if (typeof results.data == 'string') setMsg(results.data)
+            console.log('hi')
             setLoading(false)
         } catch (err) {
+            console.log(err)
+            setLoading(false)
             setErrMsg(err.message)
         }
     }
@@ -141,6 +148,10 @@ const MyProfilePage = () => {
                 <Navbar>
                 </Navbar>
             </View>
+            {msg ? (
+                <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>
+                    <View className='py-8'><Text className='text-center text-xl'>{msg}</Text></View>
+                </Modal>) : null}
             {errMsg ? (
                 <Modal title="Error" btnText="Done" onClick={() => setErrMsg("")} onCancel={() => setErrMsg("")}>
                     <View className='py-8'><Text className='text-center text-xl'>{errMsg}</Text></View>
