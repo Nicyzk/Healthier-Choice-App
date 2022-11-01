@@ -13,6 +13,7 @@ const ListPage = ({ route }) => {
     const { listName, products, lists } = route.params
     const [productDetails, setProductDetails] = useState(false)
     const [msg, setMsg] = useState("")
+    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [errMsg, setErrMsg] = useState("")
     const navigation = useNavigation()
@@ -24,15 +25,21 @@ const ListPage = ({ route }) => {
 
     useEffect(() => {
         getProductDetails()
-    }, [focus, msg])
+    }, [focus, msg, showDeleteProductModal])
 
     const getProductDetails = async () => {
+        const pid = []
         const details = []
         try {
-            for (let id of products) {
-                const result = await axios.get(`https://hcs-backend.onrender.com/api/search/product/${id}`)
-                if (result.data.length <= 0) throw new Error('No product is found for this id')
-                details.push(result.data[0])
+            // set products based on users 
+            const result = await axios.get(`https://hcs-backend.onrender.com/api/userlists/2`)
+            for (let el of result.data) {
+                if (el.list == listName && el.productid != null) pid.push(el.productid)
+            }
+            for (let i of pid) {
+                let res = await axios.get(`https://hcs-backend.onrender.com/api/search/product/${i}`)
+                if (res.data.length <=0) throw new Error('No product is found for this id!')
+                details.push(res.data[0])
             }
             setProductDetails(details)
         } catch (err) {
@@ -45,18 +52,22 @@ const ListPage = ({ route }) => {
         const products = []
         for (let p of productDetails) {
             products.push(
-                <Product deleteProduct={() => deleteProduct(p.productid)} canDelete={true} key={p.productid} name={p.productname} hcs={p.subcategory} onBasketClicked={() => setAddToListProductId(p.productid)} onMapClicked={() => { }} imgSource={images[p.productid]}></Product>
+                <Product deleteProduct={() => {
+                    setProductToDelete(p.productid)
+                    setShowDeleteProductModal(true)
+                }} canDelete={true} key={p.productid} name={p.productname} hcs={p.subcategory} onBasketClicked={() => setAddToListProductId(p.productid)} onMapClicked={() => navigation.navigate('MapPage', { location: p.location })} imgSource={images[p.productid]}></Product>
             )
         }
         return products
     }
 
-    const deleteProduct = async (id) => {
+    const deleteProduct = async () => {
         try {
             console.log(listName)
-            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removeproduct', { data: { userid: 2, list: listName, productid: id } })
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removeproduct', { data: { userid: 2, list: listName, productid: productToDelete } })
             if (typeof results.data == 'string') setMsg(results.data)
             setMsg("Product has been deleted from list!")
+            setShowDeleteProductModal(false)
         } catch (err) {
             console.log(err)
             setErrMsg(err.message)
@@ -69,7 +80,6 @@ const ListPage = ({ route }) => {
             const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removelist', { data: { userid: 2, list: listName } })
             console.log(results.data)
             if (typeof results.data == 'string') setMsg(results.data)
-            console.log('hi')
             navigation.navigate('MyLists')
             // set message. List has been deleted, you will be navigated back to your lists page. 
             // navigate back to my lists
@@ -114,7 +124,6 @@ const ListPage = ({ route }) => {
         )
     }
 
-
     return (
         <>
             <View className="p-4 flex-1 bg-white p-4" >
@@ -142,7 +151,7 @@ const ListPage = ({ route }) => {
                     <View className='py-8'><Text className='text-center text-xl'>Are you sure you want to delete this list?</Text></View>
                 </Modal>) : null}
             {showDeleteProductModal ? (
-                <Modal title="Delete List" btnText="Confirm" onClick={() => deleteProduct()} onCancel={() => setShowDeleteProductModal(false)}>
+                <Modal title="Remove Product From List" btnText="Confirm" onClick={() => deleteProduct()} onCancel={() => setShowDeleteProductModal(false)}>
                     <View className='py-8'><Text className='text-center text-xl'>Are you sure you want to delete this product?</Text></View>
                 </Modal>) : null}
             {errMsg ? (
