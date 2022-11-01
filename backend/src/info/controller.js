@@ -345,3 +345,5 @@ module.exports = {
   getInfobyCategory,
   addInfo,
 };
+
+
