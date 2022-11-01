@@ -85,7 +85,7 @@ const addPreference = (req, res) => {
     [userid, preference],
     (error, results) => {
       if (results.rows.length) {
-        res.send("Preference has already been added previously!");
+        return res.status(500).send("Preference has already been added previously!");
       } else {
         // add preference to userpreference table
         pool.query(
@@ -109,7 +109,7 @@ const removePreference = (req, res) => {
     [userid, preference],
     (error, results) => {
       if (!results.rows.length) {
-        res.send("Cannot remove preference which has not been added yet!");
+        return res.status(500).send("Cannot remove preference which has not been added yet!");
       }
 
       pool.query(
@@ -117,7 +117,7 @@ const removePreference = (req, res) => {
         [userid, preference],
         (error, results) => {
           if (error) return res.status(500).send(error.message);
-          res.status(200).send("Preference removed successfully!");
+          return res.status(200).send("Preference removed successfully!");
         }
       );
     }
@@ -142,7 +142,7 @@ const addUserlist = (req, res) => {
     [userid, list, productid],
     (error, results) => {
       if (results.rows.length) {
-        res.send("Item had already been added previously!");
+        return res.status(500).send("Item had already been added previously!");
       } else {
         // add list to userlists table
         pool.query(
@@ -168,7 +168,7 @@ const createList = (req, res) => {
     [userid, list],
     (error, results) => {
       if (results.rows.length) {
-        res.send("List name already being used!");
+        return res.status(422).send("List name already being used!");
       } else {
         // add list to userlists table
         pool.query(
@@ -192,7 +192,7 @@ const removeProduct = (req, res) => {
     [userid, list, productid],
     (error, results) => {
       if (!results.rows.length) {
-        res.send("Cannot remove product which has not been added yet!");
+        return res.status(422).send("Cannot remove product which has not been added yet!");
       }
 
       pool.query(
@@ -303,7 +303,7 @@ const addInfo = (req, res) => {
 
   pool.query(queries.checkSubcatExists, [hcs_subcat], (error, results) => {
     if (results.rows.length) {
-      res.send("Username already taken.");
+      return res.status(500).send("Username already taken.");
     }
     // add user to db
     pool.query(
