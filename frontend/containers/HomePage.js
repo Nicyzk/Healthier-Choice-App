@@ -107,61 +107,57 @@ const HomePage = ({ navigation }) => {
 
     // Search Function
     const search = async () => {
+        console.log('ran')
         //? disable types because causing errors
-        const keywords = []
+        let keywords = []
         for (let i in healthyChoices) {
             keywords.push(healthyChoices[i])
         }
         // keywords = ['Low in sugar', 'Low in fat']
-        let toSearch = ''
 
-        // if no search Text & no keywords, searchText is '*'. If got searchText & no keywords - okay
-        if (!searchText && keywords.length == 0) toSearch = '*'
+        for (let i=0; i<keywords.length; i++) {
+            if (keywords[i] == '') keywords.splice(i,1)
+        }
 
-        // if no searchText but got keywords, search only by keywords. if got both, search by both.
-        if (!searchText && keywords.length != 0)
-
+        console.log('searchText', searchText)
+        console.log(keywords)   //['']
+        const details = []
         try {
             const data = {}
             let results = {data: []}
 
             // No search no keyword: Return everything
             if (!searchText && keywords.length == 0) {
-                toSearch = '*'
-                if (searchText) results = await axios.get(`https://hcs-backend.onrender.com/api/search/all/${searchText}`)
+                results = await axios.get(`https://hcs-backend.onrender.com/api/search/all/*`)
                 for (let e of results.data) data[e.productid] = e // results.data = [{ productid: 1, ...}, ...]
                 console.log(data)
-                const details = []
                 for (let key in data) {
                     details.push(data[key])
                 }
-                console.log(details)
             }
 
             // No search have keyword: Return keyword
             else if (!searchText && keywords.length != 0) {
+                console.log('nosearch text & ')
                 for (let i=0; i<keywords.length; i++) {
                     results = await axios.get(`https://hcs-backend.onrender.com/api/search/subcategory/${keywords[i]}`)
                     for (let e of results.data) data[e.productid] = e
                 }
                 console.log(data)
-                const details = []
                 for (let key in data) {
                     details.push(data[key])
                 }
-                console.log(details)
             }
 
             // Have search no keyword: Return search
             else if (searchText && keywords.length == 0) {
+                console.log('ran 2')
                 if (searchText) results = await axios.get(`https://hcs-backend.onrender.com/api/search/all/${searchText}`)
                 for (let e of results.data) data[e.productid] = e // results.data = [{ productid: 1, ...}, ...]
                 console.log(data)
-                const details = []
                 for (let key in data) {
                     details.push(data[key])
                 }
-                console.log(details)
             }
 
             // Have search have keyword: Return the intersection
@@ -178,15 +174,16 @@ const HomePage = ({ navigation }) => {
                     }
                 }
                 console.log(data)
-                const details = []
                 for (let key in data) {
                     details.push(data[key])
                 }
-                console.log(details)
             }
+            console.log('zk')
+            console.log(details)
 
             setSearchProductDetails(details) // details = [{ productid: 1, ...}, ...]
         } catch (err) {
+            console.log('here')
             console.log(err.message)
         }
     }
