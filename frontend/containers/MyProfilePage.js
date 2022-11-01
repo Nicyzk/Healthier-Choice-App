@@ -72,9 +72,8 @@ const MyProfilePage = () => {
         const toRender = []
         for (let p of userPreferences) {
             toRender.push(
-                <View className='bg-white m-2 h-8 flex-1 flex-row items-center'>
-                    <Text className='ml-4'>{p}</Text>
-                    <FaIcon className = 'absolute m-2'
+                <View className='bg-white px-2 m-2 h-8 flex-1 flex-row items-center'>
+                    <FaIcon
                         name="remove"
                         color="red"
                         size={20}
@@ -83,6 +82,8 @@ const MyProfilePage = () => {
                             removePreference(p)
                         }}
                     ></FaIcon>
+                    <Text className='ml-4'>{p}</Text>
+                    
                 </View>)
         }
         return toRender
@@ -107,7 +108,7 @@ const MyProfilePage = () => {
                         <View className='bg-indigo-500 rounded-xl p-4 w-4/5'>
                             <Text className="text-xl text-center font-bold m-1 mt-2 mb-5 text-white">Manage Preferences</Text>
                             <View>
-                                <Text className="font-bold m-1 mt-2 mb-1 text-white">Sugar</Text>
+                                <Text className="font-bold m-1 mt-2 mb-2 text-white">Sugar</Text>
                                 <DropDownPicker
                                     className='my-2'
                                     open={openSugarDropdown}
@@ -136,7 +137,7 @@ const MyProfilePage = () => {
                             </View>
                             <View className="mt-6" >
                                 <TouchableOpacity
-                                    className="rounded-3xl justify-center bg-white mb-8"
+                                    className="rounded-3xl justify-center bg-white mb-2 "
                                     activeOpacity={1.0}
                                     onPress={addPreference}>
                                     <Text className="py-4 text-center">Add preference</Text>
