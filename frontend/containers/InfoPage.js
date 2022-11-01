@@ -43,7 +43,7 @@ const App = ({navigation}) => {
               setActionTriggered('ACTION_2');
               }}>
              <View className='items-stretch'>
-                    <View className='flex-row w-40 ml-2 items-center justify-between'>
+                    <View className='flex-row w-40 items-center justify-between'>
                         <FaIcon
                             name="hourglass-3"
                             color="black"
@@ -600,11 +600,11 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 20,
-    borderRadius: 20,
+    borderRadius: 10,
     width:'80%',
     padding: 10,
-    borderWidth:3,
-    borderColor:'rgba(0, 0, 0, 0.1)',
+    //borderWidth:3,
+    //borderColor:'rgba(0, 0, 0, 0.1)',
   },
   container: {
     flex: 1,
@@ -631,7 +631,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
     fontSize: 20,
-    left: 15
+    left: 24
     
   },
 

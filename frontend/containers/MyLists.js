@@ -31,7 +31,7 @@ export default function MyLists() {
       console.log(err.message)
     }
   }
-
+//LOOKHERE
   const renderLists = () => {
     const rendered = []
     for (let list in lists) {
@@ -41,7 +41,6 @@ export default function MyLists() {
             <Text>{list}</Text>
           </View>
         </TouchableOpacity>
-
       )
     }
     return rendered
