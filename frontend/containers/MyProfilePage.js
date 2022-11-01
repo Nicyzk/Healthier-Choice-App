@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button, Alert, SafeAreaView, ScrollView, StatusBar, TextInput } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import UploadImage from '../components/UploadImage';
-import Navbar from '../components/NavBar';
+import Navbar3 from '../components/NavBar3';
 import axios from 'axios'
 import FaIcon from 'react-native-vector-icons/FontAwesome'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -72,9 +72,9 @@ const MyProfilePage = () => {
         const toRender = []
         for (let p of userPreferences) {
             toRender.push(
-                <View className='bg-white m-2 h-8 flex-1 flex-row justify-evenly items-center'>
-                    <Text className=''>{p}</Text>
-                    <FaIcon
+                <View className='bg-white m-2 h-8 flex-1 flex-row items-center'>
+                    <Text className='ml-4'>{p}</Text>
+                    <FaIcon className = 'absolute m-2'
                         name="remove"
                         color="red"
                         size={20}
@@ -91,7 +91,7 @@ const MyProfilePage = () => {
 
     return (
         <>
-            <View className="p-4 flex-4 bg-white" >
+            <View className="p-4 flex-1 bg-white" >
                 <Text className="text-2xl text-center font-bold m-1 mt-8 mb-5 ">My Profile Page</Text>
                 <ScrollView className='h-4/5 mb-12'>
                     <View className='flex-1 items-center'>
@@ -145,8 +145,8 @@ const MyProfilePage = () => {
                         </View>
                     </View>
                 </ScrollView>
-                <Navbar>
-                </Navbar>
+                <Navbar3>
+                </Navbar3>
             </View>
             {msg ? (
                 <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>

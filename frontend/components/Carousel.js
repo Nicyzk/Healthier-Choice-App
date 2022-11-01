@@ -21,7 +21,8 @@ const Carousel = ({ images, navigation }) => {
           <Image className="h-40 w-40 rounded-3xl" key={key} source={images[key]} />
           <Text className='font-bold text-lg'>Vitagen</Text>
           <Text className='text-center'>Low in sugar</Text>
-          <View className='flex-row w-20 my-2 justify-evenly'>
+
+          <View className='flex-row absolute w-20 my-2 justify-evenly'>
             <FaIcon
               name="shopping-basket"
               color="black"

@@ -1,5 +1,5 @@
 
-import NavBar from '../components/NavBar';
+import NavBar1 from '../components/NavBar1';
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView, SafeAreaView} from "react-native";
 import FaIcon from 'react-native-vector-icons/FontAwesome'
@@ -545,7 +545,7 @@ const App = ({navigation}) => {
         </View>
         </ScrollView>
         </SafeAreaView>
-        <NavBar></NavBar>
+        <NavBar1></NavBar1>
     </View>
     
   );

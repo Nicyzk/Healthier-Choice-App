@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar'
-import NavBar from '../components/NavBar';
+import NavBar2 from '../components/NavBar2';
 import Modal from '../components/Modal'
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native';
@@ -91,7 +91,7 @@ export default function MyLists() {
             <Text className="py-4 text-center text-white">Create New List</Text>
           </TouchableOpacity>
         </View>
-        <NavBar></NavBar>
+        <NavBar2></NavBar2>
       </View>
       {showModal ? (
         <Modal title="Create New Lists" btnText="Confirm" onClick={() => createNewList()} onCancel={() => setShowModal(false)} >

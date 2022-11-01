@@ -1,5 +1,5 @@
 import { View, Text, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import NavBar from '../components/NavBar'
+import NavBar2 from '../components/NavBar2'
 import { useEffect, useState } from 'react'
 import Product from '../components/Product'
 import Modal from '../components/Modal'
@@ -77,7 +77,7 @@ const ListPage = ({ route }) => {
                         <Text className="py-4 text-center text-white">Delete List</Text>
                     </TouchableOpacity>
                 </View>
-                <NavBar></NavBar>
+                <NavBar2></NavBar2>
             </View>
             {msg ? (
                 <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>
