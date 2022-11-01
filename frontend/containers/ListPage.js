@@ -6,11 +6,15 @@ import Modal from '../components/Modal'
 import images from '../consts/images'
 import React from 'react';
 import axios from 'axios';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
 const ListPage = ({ route }) => {
     const { listName, products } = route.params
     const [productDetails, setProductDetails] = useState(false)
+    const [msg, setMsg] = useState("")
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [errMsg, setErrMsg] = useState("")
+    const navigation = useNavigation()
 
     useEffect(() => {
         getProductDetails()
@@ -41,16 +45,48 @@ const ListPage = ({ route }) => {
         return products
     }
 
+    const removeList = async () => {
+        try {
+            console.log(listName)
+            const results = await axios.delete('https://hcs-backend.onrender.com/api/userlists/removelist', { data: { userid: 2, list: listName }})
+            console.log(results.data)
+            if (typeof results.data == 'string') setMsg(results.data)
+            console.log('hi')
+            navigation.navigate('MyLists')
+            // set message. List has been deleted, you will be navigated back to your lists page. 
+            // navigate back to my lists
+        } catch (err) {
+            console.log(err)
+            setErrMsg(err.message)
+        }
+    }
+
     return (
         <>
             <View className="p-4 flex-1 bg-white p-4" >
                 <Text className="text-2xl text-center font-bold m-4 py-4 ">{listName}</Text>
                 <ScrollView className='w-full' contentContainerStyle={{ alignItems: 'center' }}>
-                    {!productDetails ? <Text>Loading Products...</Text>: (productDetails.length == 0 ? <Text>No products in list</Text>: renderProducts())}
+                    {!productDetails ? <Text>Loading Products...</Text> : (productDetails.length == 0 ? <Text>No products in list</Text> : renderProducts())}
                     <View className='h-48'></View>
                 </ScrollView>
+                <View className="m-4 mx-8 py-2" >
+                    <TouchableOpacity
+                        className="rounded-3xl justify-center bg-red-500 active:bg-red-600 mb-8"
+                        activeOpacity={1.0}
+                        onPress={() => setShowDeleteModal(true)}>
+                        <Text className="py-4 text-center text-white">Delete List</Text>
+                    </TouchableOpacity>
+                </View>
                 <NavBar></NavBar>
             </View>
+            {msg ? (
+                <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>
+                    <View className='py-8'><Text className='text-center text-xl'>{msg}</Text></View>
+                </Modal>) : null}
+            {showDeleteModal ? (
+                <Modal title="Delete List" btnText="Confirm" onClick={() => removeList()} onCancel={() => setShowDeleteModal(false)}>
+                    <View className='py-8'><Text className='text-center text-xl'>Are you sure you want to delete this list?</Text></View>
+                </Modal>) : null}
             {errMsg ? (
                 <Modal title="Error" btnText="Done" onClick={() => setErrMsg("")} onCancel={() => setErrMsg("")}>
                     <View className='py-8'><Text className='text-center text-xl'>{errMsg}</Text></View>

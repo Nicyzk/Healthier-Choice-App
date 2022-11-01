@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import axios from 'axios'
@@ -79,10 +79,31 @@ export default function App() {
     return listOfPlaces
   }
 
+  const renderMapMarkers = () => {
+    const markers = []
+
+    for (let m of nearbyPlaces) {
+      markers.push(
+        <Marker
+            key={m.lat}
+            coordinate={{latitude: m.lat,
+            longitude: m.lng}}
+            title={m.name}
+            description={m.name}
+         />
+      )
+    }
+    return markers
+  }
+
   return (
     <View className='flex-1 bg-white items-center p-4'>
       <View className='m-4'><Text className="text-lg font-bold">Nearest Locations Found</Text></View>
-      {ready ? <MapView provider={PROVIDER_GOOGLE} showsUserLocation={true} initialRegion={initialRegion} className="h-70 w-70" style={styles.map} /> : <View className="h-70 w-70"><Text>Loading map...</Text></View>}
+      {ready ? (
+        <MapView provider={PROVIDER_GOOGLE} showsUserLocation={true} initialRegion={initialRegion} className="h-70 w-70" style={styles.map}>
+          {renderMapMarkers()}
+        </MapView>
+      ) : <View className="h-70 w-70"><Text>Loading map...</Text></View>}
       {ready ? <ScrollView className='h-2/3'>{renderListOfPlaces()}</ScrollView> : <View className="h-70 w-70"><Text>Loading nearby locations...</Text></View>}
     </View>
   );
