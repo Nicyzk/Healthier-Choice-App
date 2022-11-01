@@ -1,8 +1,8 @@
 const pool = require("../../db");
 
-const url = "https://data.gov.sg/api/action/datastore_search?resource_id=d3b2447d-0a42-4510-9859-9be85511de8a&limit=1"
+const url = "https://data.gov.sg/api/action/datastore_search?resource_id=d3b2447d-0a42-4510-9859-9be85511de8a&limit=100"
 
-const query = "INSERT INTO buffer (productid, productname) VALUES "
+const query = `INSERT INTO buffer (productname) VALUES `
 
   async function buffer() {
     let response = await fetch(url)
@@ -18,11 +18,8 @@ const query = "INSERT INTO buffer (productid, productname) VALUES "
     //console.log(endlist)
 
     for (let i in endlist) {
-       //pool.query(query + "(" + i + "," + endlist[i] + ")", [i,endlist[i]])
-        //console.log(endlist[i]);
-        console.log(query + "(" + i + "," + endlist[i] + ")")
+        pool.query(query + "(\'" + endlist[i] + "\')")
     }
-    // console.log('I reached.')
 }
 
 
