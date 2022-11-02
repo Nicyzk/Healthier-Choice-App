@@ -77,13 +77,13 @@ const HomePage = ({ navigation }) => {
                 <View className="absolute h-full w-full flex-1 justify-center items-center z-2">
                     <View className="w-80 rounded-xl p-8 bg-white">
                         <Text className='text-2xl font-bold text-center'>Filter by category</Text>
-                        <View className="my-4" style={{ zIndex: 20 }}>
+                        {/* <View className="my-4" style={{ zIndex: 20 }}>
                             <Text className="font-bold pb-1">Type:</Text>
                             <DropdownMulti options={typeOptions} value={types} setValue={setTypes} />
-                        </View>
+                        </View> */}
                         <View>
                             <Text className="font-bold">Health Filter: </Text>
-                            <ScrollView className='h-1/2'>
+                            <ScrollView className='h-2/3'>
                                 {healthFilters}
                                 <View className='h-32'></View>
                             </ScrollView>
@@ -186,6 +186,7 @@ const HomePage = ({ navigation }) => {
         } catch (err) {
             console.log('here')
             console.log(err.message)
+            setErrMsg(err.message)
         }
     }
 
@@ -204,21 +205,26 @@ const HomePage = ({ navigation }) => {
     }, [focus])
 
     const getRecommendedProducts = async () => {
-        let results = await axios.get('https://hcs-backend.onrender.com/api/userpreference/2')
-        const temp = []
-        const preferences = []
-        for (let p of results.data) {
-            preferences.push(p.preference)
-        }
-        console.log(preferences)
-        for (let i=0; i<preferences.length; i++) {
-            results = await axios.get(`https://hcs-backend.onrender.com/api/search/subcategory/${preferences[i]}`)
-            for (let j in results.data) {
-                temp.push(results.data[j])
+        try {
+            let results = await axios.get('https://hcs-backend.onrender.com/api/userpreference/2')
+            const temp = []
+            const preferences = []
+            for (let p of results.data) {
+                preferences.push(p.preference)
             }
+            console.log(preferences)
+            for (let i=0; i<preferences.length; i++) {
+                results = await axios.get(`https://hcs-backend.onrender.com/api/search/subcategory/${preferences[i]}`)
+                for (let j in results.data) {
+                    temp.push(results.data[j])
+                }
+            }
+            console.log(temp)
+            setRecommendedProductDetails(temp)
+        } catch (err) {
+            setErrMsg(err.message)
         }
-        console.log(temp)
-        setRecommendedProductDetails(temp)
+        
     }
 
     // Add Product to List
@@ -226,9 +232,10 @@ const HomePage = ({ navigation }) => {
         const items = []
         for (let l in lists) items.push({label: l, value: l})
         return (
-            <View className='py-8'>
+            <View className='py-8' style={{zIndex: 10}}>
                 <Text className='my-4'>Upon confirming, the product id: {addtoListProductId} will be added to the selected list</Text>
                 <DropDownPicker
+                    style={{zIndex: 10}}
                     open={openListDropdown}
                     setOpen={setOpenListDropdown}
                     value={selectedList}

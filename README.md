@@ -42,6 +42,7 @@
 
 ## Lab 4
 - [Test Cases and Results](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%204?csf=1&web=1&e=0skrGf)
+- [Demo Script](https://entuedu.sharepoint.com/:w:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%204/Demo%20Script.docx?d=w235b6ad459844978b05dd2377a113f42&csf=1&web=1&e=7b5EWc)
 
 ## Lab 5
 - [SRS Documentation](https://entuedu.sharepoint.com/:f:/r/teams/SWEEESolutions2006/Shared%20Documents/General/Lab%205?csf=1&web=1&e=qJ8nhe)

@@ -166,7 +166,7 @@ const MyProfilePage = () => {
                 <Navbar3>
                 </Navbar3>
             </View>
-            {loading ? <View className='bg-slate-100 h-full w-full absoluteflex-1 justify-center items-center'><Text>Loading...please wait</Text></View>: null}
+            {loading ? <View className='bg-slate-100 h-full w-full absolute flex-1 justify-center items-center'><Text>Loading...please wait</Text></View>: null}
             {msg ? (
                 <Modal title="Message" btnText="Done" onClick={() => setMsg("")} onCancel={() => setMsg("")}>
                     <View className='py-8'><Text className='text-center text-xl'>{msg}</Text></View>
