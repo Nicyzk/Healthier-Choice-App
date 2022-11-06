@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './containers/HomePage'
 import Overlay from './components/Overlay'
-import MyProfilePage from './containers/MyProfilePage'
+import MyProfilePage from './containers/ProfilePage'
 import MyLists from './containers/MyLists'
-import infoPage from './containers/InfoPage'
-import MapPage from './containers/MapPage'
+import infoPage from './containers/HCSInfoPage'
+import MapPage from './containers/LocationPage'
 import ListPage from './containers/ListPage'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
